@@ -15,3 +15,20 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+
+# Backup entities generated with doctrine:generate:entities command
+*/Entity/*~
+
+# Assets et uploads
+/web/bundles/
+#/web/css/
+#/web/js/
+/web/uploads/
+/web/fonts/
+!/web/img/
+
+/.idea
+
+# npm assets
+/node_modules
+*.bat
