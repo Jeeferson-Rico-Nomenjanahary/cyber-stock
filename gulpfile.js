@@ -1,7 +1,7 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
 
 // Import dependencies
-var concat   = require('gulp-concat'),
+    concat   = require('gulp-concat'),
     less   = require('gulp-less'),
     cleanCSS   = require('gulp-clean-css'),
     uglify   = require('gulp-uglify'),
@@ -14,24 +14,27 @@ var concat   = require('gulp-concat'),
     gulp.task('css', function(){
         gulp.src([
             // all css and less sources
+           // './web/src/css/style.css',
+            './app/Resources/public/css/*.css',
 
-        ], {base: './src/'})
+        ]) 
             .pipe(concat('style.min.css'))
             .pipe(less())
-            .pipe(cleanCSS())
-            .pipe(gulp.dest('./web/css'))
+            .pipe(minifyCSS())
+            .pipe(gulp.dest('./app/Resources/public/css/min'))
         ;
     });
 
     gulp.task('js',function () {
         gulp.src([
             // all js sources
+            //'./web/src/js/login.js',
+            './app/Resources/public/js/*.js',
         ])
             .pipe(concat('app.min.js'))
-            .pipe(uglify()) //Retire la minification pendant le dev pour verification debug du js
-            .pipe(gulp.dest('./web/js'));
+            //.pipe(uglify()) //Retire la minification pendant le dev pour verification debug du js
+            .pipe(gulp.dest('./app/Resources/public/js/min'));
     });
-
     gulp.task('fonts',function () {
       gulp.src([
           // all fonts sources
