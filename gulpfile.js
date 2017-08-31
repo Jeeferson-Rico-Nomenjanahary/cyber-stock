@@ -21,7 +21,8 @@ var gulp = require('gulp'),
             .pipe(concat('style.min.css'))
             .pipe(less())
             .pipe(minifyCSS())
-            .pipe(gulp.dest('./app/Resources/public/css/min'))
+            //.pipe(gulp.dest('./app/Resources/public/css/min'))
+            .pipe(gulp.dest('./web/css'));
         ;
     });
 
@@ -33,7 +34,8 @@ var gulp = require('gulp'),
         ])
             .pipe(concat('app.min.js'))
             //.pipe(uglify()) //Retire la minification pendant le dev pour verification debug du js
-            .pipe(gulp.dest('./app/Resources/public/js/min'));
+            //.pipe(gulp.dest('./app/Resources/public/js/min'));
+            .pipe(gulp.dest('./web/js/'));
     });
     gulp.task('fonts',function () {
       gulp.src([

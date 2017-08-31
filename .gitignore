@@ -21,13 +21,14 @@
 
 # Assets et uploads
 /web/bundles/
-#/web/css/
-#/web/js/
+/web/css/
+/web/js/
 /web/uploads/
 /web/fonts/
 !/web/img/
 
 /.idea
+/.idea/*
 
 # npm assets
 /node_modules
