@@ -93,6 +93,19 @@ body{
 .content{
 	background: #ffffff;
 }
+/* login*/
+.login input.checkbox-login{
+    display: inline-block;
+    float: left;
+    width: 7%;
+    margin-left: 6%;
+    margin-top: 13px;
+    margin-right: -3%;
+  }
+.login label.label-checkbox-login{
+    margin-left: 0px;
+    width: 80%;
+  }
 .login{
 	width: 525px;
     background: #ffffff;
@@ -117,7 +130,7 @@ body{
     float: left;
     padding: 10px;
     margin-left: 32px;
-    font-size: 20px;
+    font-size: 16px;
     font-family: Arial;
 }
 .login input {
@@ -129,11 +142,11 @@ input.btn-connex {
     background: #1c3f65;
     color: #ffffff;
     border-radius: 9px;
-    width: 108px;
+    width: auto;
     cursor: pointer;
     margin-bottom: 22px;
     margin-left: 29%;
-    margin-top: 21px;
+    margin-top: 12px;
 }
 input.btn-connex:hover {
     background: #d60000;
@@ -145,6 +158,21 @@ a.btn-oublier {
     margin-top: 19px;
     color: red;
 }
+/* fin login*/
+/*  reinitialisation*/
+
+label.LB-reinitialisation {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+}
+.reinitialisation {
+    text-align: center;
+}
+input.btn-connex.BTN-reinitialisation{
+  margin-left: 0;
+}
+/* fin reinitialisation*/
 .header-class {
     background: #fff;
     border-radius: 13px 13px 0 0;
