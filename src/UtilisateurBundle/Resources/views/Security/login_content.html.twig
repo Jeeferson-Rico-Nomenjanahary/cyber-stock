@@ -8,7 +8,7 @@
     <div class="login">
         <p>GESTION DE STOCK</p>
         <div class="logo-login"><img src="{{ asset('img/logo.jpg') }}">  </div>
-    </div>
+    
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     {% endif %}
@@ -21,13 +21,15 @@
         <input type="password" id="password" name="_password" required="required" />
     </div>
     <div>
-        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+        <input class="checkbox-login" type="checkbox" id="remember_me" name="_remember_me" value="on" />
+        <label class="label-checkbox-login" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
     </div>
     <div>
         <a class="btn-oublier" href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a>
     </div>
     <div align="center">
-        <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        <input  class="btn-connex"  type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+    </div>
     </div>
 </form>
+
