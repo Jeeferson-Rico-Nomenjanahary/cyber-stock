@@ -34,6 +34,24 @@ class Article
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="modify_on", type="datetime", nullable=true)
+     */
+    private $modifyOn;
+
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+    }
 
 
     /**
@@ -93,5 +111,52 @@ class Article
     {
         return $this->description;
     }
-}
 
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Article
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set modifyOn
+     *
+     * @param \DateTime $modifyOn
+     *
+     * @return Article
+     */
+    public function setModifyOn($modifyOn)
+    {
+        $this->modifyOn = $modifyOn;
+
+        return $this;
+    }
+
+    /**
+     * Get modifyOn
+     *
+     * @return \DateTime
+     */
+    public function getModifyOn()
+    {
+        return $this->modifyOn;
+    }
+}

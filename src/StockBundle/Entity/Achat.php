@@ -45,6 +45,19 @@ class Achat
      */
     private $prixUnitaire;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="modify_on", type="datetime", nullable=true)
+     */
+    private $modifyOn;
 
 
 
@@ -128,5 +141,53 @@ class Achat
     public function getArticleId()
     {
         return $this->articleId;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Achat
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set modifyOn
+     *
+     * @param \DateTime $modifyOn
+     *
+     * @return Achat
+     */
+    public function setModifyOn($modifyOn)
+    {
+        $this->modifyOn = $modifyOn;
+
+        return $this;
+    }
+
+    /**
+     * Get modifyOn
+     *
+     * @return \DateTime
+     */
+    public function getModifyOn()
+    {
+        return $this->modifyOn;
     }
 }
