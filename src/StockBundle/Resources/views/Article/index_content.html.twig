@@ -1,2 +1,36 @@
+<div id="vente" class="tabcontent " style="display: block;">
+    <div class="btn_ajout" >
+        <span class="icon-new btn-connex"><a href="{{ path('article_add') }}">Nouveaux</a></span>
+    </div>
+    <div class="contenu-recherche">
+        <fieldset>
+            <legend>Recherche</legend>
+            <div style="display: inline-block;">
+                <span class="form-label-content">Article</span>
+                <input  type="text" name="Article" id="Article">
+                <label for="Article" class="form-label">
 
-{{ dump(articles) }}
+                </label>
+            </div>
+            <span class="icon-recherche">Recherche</span>
+        </fieldset>
+    </div>
+<h3>liste des Articles</h3>
+<div class="contenu">
+    <table>
+        <tbody>
+        <tr>
+            <td class="table_title">Nom</td>
+            <td class="table_title">Description</td>
+            <td class="table_title">Action</td>
+        </tr>
+        {% for article in articles %}
+            <tr>
+                <td class="interval">{{ article.name }}</td>
+                <td class="interval">{{ article.description }}</td>
+                <td class="interval"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
