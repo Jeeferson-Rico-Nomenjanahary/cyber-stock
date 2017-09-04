@@ -1,0 +1,51 @@
+{{ dump (achats) }}
+<div id="vente" class="tabcontent " style="display: block;">
+    <div class="btn_ajout" >
+        <span class="icon-new btn-connex"><a href="{{ path('achat_add') }}">Nouveaux</a></span>
+    </div>
+    <div class="contenu-recherche">
+        <fieldset>
+            <legend>Recherche</legend>
+            <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" style="display: inline-block;">
+                <label>Date: </label>
+                <label>Du</label><input class="form-control" type="text" name="date" readonly />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <label>Au</label><input class="form-control" type="text" name="date" readonly />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+
+            <div style="display: inline-block;">
+                <span class="form-label-content">Achat</span>
+                <input  type="text" name="Article" id="Article">
+                <label for="Article" class="form-label">
+
+                </label>
+            </div>
+            <span class="icon-recherche">Recherche</span>
+
+        </fieldset>
+    </div>
+<h3>liste des Achat</h3>
+<div class="contenu">
+    <table>
+        <tbody>
+        <tr>
+            <td class="table_title">Date</td>
+            <td class="table_title">Article</td>
+            <td class="table_title">Description</td>
+            <td class="table_title">Quantite</td>
+            <td class="table_title">Prix de Vente</td>
+            <td class="table_title">Prix d'achat</td>
+            <td class="table_title">Prix de vente total </td>
+            <td class="table_title">Action</td>
+        </tr>
+        {% for achat in achats %}
+            {#<tr>
+                <td class="interval">{{ article.name }}</td>
+                <td class="interval">{{ article.description }}</td>
+                <td class="interval"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+            </tr>#}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

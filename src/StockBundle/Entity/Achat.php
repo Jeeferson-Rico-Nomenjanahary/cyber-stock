@@ -24,12 +24,12 @@ class Achat
     /**
      * @var \Article
      *
-     * @ORM\OneToOne(targetEntity="StockBundle\Entity\Article")
+     * @ORM\ManyToOne(targetEntity="StockBundle\Entity\Article")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="article_id", referencedColumnName="id",unique=false)
      * })
      */
-    private $articleId;
+    private $article;
 
     /**
      * @var int
@@ -122,13 +122,13 @@ class Achat
     /**
      * Set articleId
      *
-     * @param \StockBundle\Entity\Article $articleId
+     * @param \StockBundle\Entity\Article $article
      *
      * @return Achat
      */
-    public function setArticleId(\StockBundle\Entity\Article $articleId = null)
+    public function setArticle(\StockBundle\Entity\Article $article = null)
     {
-        $this->articleId = $articleId;
+        $this->article = $article;
 
         return $this;
     }
@@ -138,9 +138,9 @@ class Achat
      *
      * @return \StockBundle\Entity\Article
      */
-    public function getArticleId()
+    public function getArticle()
     {
-        return $this->articleId;
+        return $this->article;
     }
 
     /**

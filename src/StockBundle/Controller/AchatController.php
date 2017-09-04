@@ -29,7 +29,7 @@ class AchatController extends Controller
 
         $achats = $em->getRepository('StockBundle:Achat')->findAll();
 
-        return $this->render('achat/index.html.twig', array(
+        return $this->render('StockBundle:Achat:index.html.twig', array(
             'achats' => $achats,
         ));
     }
@@ -37,14 +37,64 @@ class AchatController extends Controller
     /**
      * Finds and displays a achat entity.
      *
-     * @Route("/{id}", name="achat_show")
-     * @Method("GET")
+     * @Route("/edit/{id}", name="achat_edit")
      */
-    public function showAction(Achat $achat)
+    public function editAction(Request $request)
     {
-
-        return $this->render('achat/edit.html.twig', array(
+        $achatId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $achat = $em->getRepository('StockBundle:Article')->find($achatId);
+        if ($request->isMethod('POST'))  {
+            $this->updateAchat($achat,$request);
+        }
+        return $this->render('StockBundle:Achat:edit.html.twig', array(
             'achat' => $achat,
         ));
+    }
+    public function updateAchat($achat,Request $request){
+
+    }
+
+    /**
+     * Add a achat entity
+     * @Route("/add", name="achat_add")
+     */
+    public function addAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $articles = $em->getRepository('StockBundle:Article')->findAll();
+        if ($request->isMethod('POST'))  {
+            $this->saveAchat($request);
+
+        }
+        return $this->render('StockBundle:Achat:add.html.twig', array(
+            'articles' => $articles
+        ));
+    }
+
+    public function saveAchat(Request $request){
+        // save
+        $em = $this->getDoctrine()->getManager();
+
+        $achat = new Achat();
+        $data = $request->request;
+        $articleId = $data->get('_achatarticle');
+        $article = $em->getRepository('StockBundle:Article')->find($articleId);
+        $achatDate = $data->get('_achatdate');
+        /**
+         * @Todo format date for insert in database
+         */
+
+        $achatDate  = new \DateTime();
+        $achatQuantite = $data->get('_achatquantite');
+        $achatPrixUnitaire = $data->get('_achatprixunitaire');
+        $achat->setArticle($article);
+        $achat->setQuantite($achatQuantite);
+        $achat->setPrixUnitaire($achatPrixUnitaire);
+        $achat->setCreatedAt($achatDate);
+        $em->persist($achat);
+        $em->flush();
+
     }
 }

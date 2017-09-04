@@ -24,7 +24,7 @@ class Vente
     /**
      * @var \Article
      *
-     * @ORM\OneToOne(targetEntity="StockBundle\Entity\Article")
+     * @ORM\ManyToOne(targetEntity="StockBundle\Entity\Article")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      * })
