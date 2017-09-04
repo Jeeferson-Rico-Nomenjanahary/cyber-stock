@@ -1,0 +1,17 @@
+<form action="{{ path("article_add") }}" method="post">
+    <div class="login">
+        <p>Ajout d'un Article</p>
+        <div>
+            <label for="artclename">nom</label>
+            <input type="text" id="artclename" name="_artclename" required="required" /></td>
+        </div>
+        <div>
+            <label for="articledescription">desccription</label>
+            <textarea  id="articledescription" name="_articledescription"></textarea>
+        </div>
+
+        <div align="center">
+            <input  class="btn-connex"  type="submit" id="_submit" name="_submit" value="Valider" />
+        </div>
+    </div>
+</form>

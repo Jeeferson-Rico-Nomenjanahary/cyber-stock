@@ -6,6 +6,9 @@ use StockBundle\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Article controller.
@@ -26,7 +29,7 @@ class ArticleController extends Controller
 
         $articles = $em->getRepository('StockBundle:Article')->findAll();
 
-        return $this->render('article/index.html.twig', array(
+        return $this->render('StockBundle:Article:index.html.twig', array(
             'articles' => $articles,
         ));
     }
@@ -34,14 +37,56 @@ class ArticleController extends Controller
     /**
      * Finds and displays a article entity.
      *
-     * @Route("/{id}", name="article_show")
+     * @Route("/edit/{id}", name="article_edit")
      * @Method("GET")
      */
-    public function showAction(Article $article)
+    public function editAction(Request $request)
     {
 
-        return $this->render('article/show.html.twig', array(
-            'article' => $article,
+        $articleId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('StockBundle:Article')->find($articleId);
+        if ($request->isMethod('POST'))  {
+            $this->updateArticle($request);
+        }
+        return $this->render('StockBundle:Article:edit.html.twig', array(
+            'article' => $article
         ));
+    }
+
+
+    /**
+     * Add a article entity
+     * @Route("/add", name="article_add")
+     */
+    public function addAction(Request $request){
+
+        if ($request->isMethod('POST'))  {
+            $this->saveArticle($request);
+
+        }
+        return $this->render('StockBundle:Article:add.html.twig', array(
+        ));
+    }
+
+    public function saveArticle(Request $request){
+        // save
+        $em = $this->getDoctrine()->getManager();
+        $article = new Article();
+        $data = $request->request;
+        $artcleName = $data->get('_artclename');
+        $artcleDescription = $data->get('_articledescription');
+        $date  = new \DateTime();
+        $article->setName($artcleName);
+        $article->setDescription($artcleDescription);
+        $article->setCreatedAt($date);
+        $em->persist($article);
+        $em->flush();
+
+    }
+
+    public function updateArticle(Request $request){
+        // save
+
     }
 }

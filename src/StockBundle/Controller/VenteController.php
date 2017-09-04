@@ -6,6 +6,9 @@ use StockBundle\Entity\Vente;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Vente controller.
@@ -40,7 +43,7 @@ class VenteController extends Controller
     public function showAction(Vente $vente)
     {
 
-        return $this->render('vente/show.html.twig', array(
+        return $this->render('vente/edit.html.twig', array(
             'vente' => $vente,
         ));
     }
