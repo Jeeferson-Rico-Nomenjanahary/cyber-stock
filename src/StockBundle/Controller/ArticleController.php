@@ -38,7 +38,6 @@ class ArticleController extends Controller
      * Finds and displays a article entity.
      *
      * @Route("/edit/{id}", name="article_edit")
-     * @Method("GET")
      */
     public function editAction(Request $request)
     {
@@ -47,7 +46,7 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('StockBundle:Article')->find($articleId);
         if ($request->isMethod('POST'))  {
-            $this->updateArticle($request);
+            $this->updateArticle($article,$request);
         }
         return $this->render('StockBundle:Article:edit.html.twig', array(
             'article' => $article
@@ -74,8 +73,8 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $article = new Article();
         $data = $request->request;
-        $artcleName = $data->get('_artclename');
-        $artcleDescription = $data->get('_articledescription');
+        $artcleName = trim($data->get('_artclename'));
+        $artcleDescription = trim($data->get('_articledescription'));
         $date  = new \DateTime();
         $article->setName($artcleName);
         $article->setDescription($artcleDescription);
@@ -85,8 +84,18 @@ class ArticleController extends Controller
 
     }
 
-    public function updateArticle(Request $request){
-        // save
+    public function updateArticle($article,Request $request){
+        // update
+        $em = $this->getDoctrine()->getManager();
+        $data = $request->request;
+        $artcleName = trim($data->get('_artclename'));
+        $artcleDescription = trim($data->get('_articledescription'));
+        $date  = new \DateTime();
+        $article->setName($artcleName);
+        $article->setDescription($artcleDescription);
+        $article->setModifyOn($date);
+        $em->persist($article);
+        $em->flush();
 
     }
 }
