@@ -5,6 +5,7 @@ namespace StockBundle\Controller;
 use StockBundle\Entity\Achat;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use \DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -81,12 +82,8 @@ class AchatController extends Controller
         $data = $request->request;
         $articleId = $data->get('_achatarticle');
         $article = $em->getRepository('StockBundle:Article')->find($articleId);
-        $achatDate = $data->get('_achatdate');
-        /**
-         * @Todo format date for insert in database
-         */
-
-        $achatDate  = new \DateTime();
+        $achatDate = $this->convertStringToDate($data->get('_achatdate'));
+        //$achatDate  = new \DateTime();
         $achatQuantite = $data->get('_achatquantite');
         $achatPrixUnitaire = $data->get('_achatprixunitaire');
         $achat->setArticle($article);
@@ -95,6 +92,12 @@ class AchatController extends Controller
         $achat->setCreatedAt($achatDate);
         $em->persist($achat);
         $em->flush();
+
+    }
+    function convertStringToDate($str){
+        $myDateTime = DateTime::createFromFormat('d/m/Y', $str);
+        $newDateString = $myDateTime->format('Y-m-d H:i:s');
+        return $newDateString;
 
     }
 }

@@ -14,6 +14,10 @@ var gulp = require('gulp'),
     gulp.task('css', function(){
         gulp.src([
             // all css and less sources
+
+           // './node_modules/bootstrap/dist/css/bootstrap.min.css',
+            //'./node_modules/eonasdan-bootstrap-datetimepicker/src/less/_bootstrap-datetimepicker.less',
+            //'./node_modules/eonasdan-bootstrap-datetimepicker/src/less/bootstrap-datetimepicker-build.less',
            // './web/src/css/style.css',
             './app/Resources/public/css/*.css',
 

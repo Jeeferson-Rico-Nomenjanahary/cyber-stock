@@ -152,7 +152,7 @@ class Vente
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime($createdAt);
 
         return $this;
     }
