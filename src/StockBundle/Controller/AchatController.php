@@ -24,11 +24,34 @@ class AchatController extends Controller
      * @Route("/", name="achat_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $achats = $em->getRepository('StockBundle:Achat')->findAll();
+        $itemsPerPage = 10; //$this->container->getParameter('per_page');
+        $repository = $em->getRepository('StockBundle:Achat');
+
+        $sort = array($request->query->get('sort', 'orderNum'), $request->query->get('dir', 'asc'));
+        $filters = null;
+        $dates = null;
+
+        if (isset($_REQUEST['filters'])) {
+            $filters = $_REQUEST['filters'];
+        }
+
+        if (isset($_REQUEST['dates'])) {
+            $dates = $_REQUEST['dates'];
+        }
+
+        $achats = $repository->findAchat($sort, $filters, $dates);
+
+
+        /*$achats = $this->get('knp_paginator')->paginate(
+            $achats,
+            $request->query->getInt('page', 1),
+            $itemsPerPage
+        );*/
 
         return $this->render('StockBundle:Achat:index.html.twig', array(
             'achats' => $achats,
@@ -44,15 +67,36 @@ class AchatController extends Controller
     {
         $achatId = $request->get('id');
         $em = $this->getDoctrine()->getManager();
-        $achat = $em->getRepository('StockBundle:Article')->find($achatId);
+        $achat = $em->getRepository('StockBundle:Achat')->find($achatId);
+
+        $articles = $em->getRepository('StockBundle:Article')->findAll();
         if ($request->isMethod('POST'))  {
             $this->updateAchat($achat,$request);
         }
         return $this->render('StockBundle:Achat:edit.html.twig', array(
             'achat' => $achat,
+            'articles' =>$articles
         ));
     }
     public function updateAchat($achat,Request $request){
+        // update
+        $em = $this->getDoctrine()->getManager();
+        $data = $request->request;
+
+        $date  = new \DateTime();
+        $achatQuantite = $data->get('_achatquantite');
+        $achatPrixUnitaire = $data->get('_achatprixunitaire');
+        $achatArticle = $data->get('_achatarticle');
+        $article = $em->getRepository('StockBundle:Article')->find($achatArticle);
+        $achatDate  = $this->convertStringToDate($data->get('_achatdate'));
+        $achat->setCreatedAt($achatDate);
+        $achat->setPrixUnitaire($achatPrixUnitaire);
+        $achat->setPrixUnitaire($achatPrixUnitaire);
+        $achat->setQuantite($achatQuantite);
+        $achat->setArticle($article);
+        $achat->setModifyOn($date);
+        $em->persist($achat);
+        $em->flush();
 
     }
 

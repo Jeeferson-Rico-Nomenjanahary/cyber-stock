@@ -1,4 +1,3 @@
-{{ dump (achats) }}
 <div id="vente" class="tabcontent " style="display: block;">
     <div class="btn_ajout" >
         <span class="icon-new btn-connex"><a href="{{ path('achat_add') }}">Nouveaux</a></span>
@@ -34,17 +33,20 @@
             <td class="table_title">Article</td>
             <td class="table_title">Description</td>
             <td class="table_title">Quantite</td>
-            <td class="table_title">Prix de Vente</td>
             <td class="table_title">Prix d'achat</td>
-            <td class="table_title">Prix de vente total </td>
+            <td class="table_title">Prix d'achat total </td>
             <td class="table_title">Action</td>
         </tr>
         {% for achat in achats %}
-            {#<tr>
-                <td class="interval">{{ article.name }}</td>
-                <td class="interval">{{ article.description }}</td>
-                <td class="interval"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
-            </tr>#}
+            <tr>
+                <td class="interval">{{ achat.createdAt|date('d/m/Y') }}</td>
+                <td class="interval">{{ achat.article.name }}</td>
+                <td class="interval">{{ achat.article.description }}</td>
+                <td class="interval">{{ achat.quantite }}</td>
+                <td class="interval">{{ achat.prixUnitaire }}</td>
+                <td class="interval">{{ achat.prixUnitaire * achat.quantite }}</td>
+                <td class="interval"><a href="{{ path('achat_edit', { 'id': achat.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>
