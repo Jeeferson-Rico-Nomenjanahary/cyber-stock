@@ -1,0 +1,83 @@
+/* login*/
+.login input.checkbox-login{
+    display: inline-block;
+    float: left;
+    width: 7%;
+    margin-left: 6%;
+    margin-top: 13px;
+    margin-right: -3%;
+  }
+.login label.label-checkbox-login{
+    margin-left: 0px;
+    width: 80%;
+  }
+.login{
+  width: 525px;
+    background: #ffffff;
+    border-radius: 20px;
+    margin-left: 36%;
+    margin-top: 13%;
+
+}
+.login p {
+    font-family: Arial;
+    font-size: 29px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 15px;
+    margin-bottom: 5px;
+}
+.logo-login {
+    margin-bottom: 20px;
+}
+.login label {
+    width: 24%;
+    float: left;
+    padding: 10px;
+    margin-left: 32px;
+    font-size: 16px;
+    font-family: Arial;
+}
+.login input {
+    width: 294px;
+    padding: 7px;
+    margin: 6px;
+}
+input.btn-connex {
+    background: #1c3f65;
+    color: #ffffff;
+    border-radius: 9px;
+    width: auto;
+    cursor: pointer;
+    margin-bottom: 22px;
+    margin-left: 29%;
+    margin-top: 12px;
+}
+input.btn-connex:hover {
+    background: #d60000;
+}
+a.btn-oublier {
+    margin-left: 8%;
+    display: inline-block;
+    float: left;
+    margin-top: 19px;
+    color: red;
+}
+/* fin login*/
+/*  reinitialisation*/
+
+label.LB-reinitialisation {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+}
+.reinitialisation {
+    text-align: center;
+}
+input.btn-connex.BTN-reinitialisation{
+  margin-left: 0;
+}
+/* fin reinitialisation*/
+.tahina{
+    width: 100%;
+}

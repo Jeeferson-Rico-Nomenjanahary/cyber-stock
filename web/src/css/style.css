@@ -1,0 +1,229 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?fxmesu');
+  src:  url('fonts/icomoon.eot?fxmesu#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?fxmesu') format('truetype'),
+    url('fonts/icomoon.woff?fxmesu') format('woff'),
+    url('fonts/icomoon.svg?fxmesu#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-uni34:before {
+  content: "\34";
+}
+.icon-uni35:before {
+  content: "\35";
+}
+.icon-uni38:before {
+  content: "\38";
+}
+.icon-uni39:before {
+  content: "\39";
+}
+.icon-new:before {
+  content: "\69";
+  padding-right: 5px;
+}
+.icon-uniE101:before {
+  content: "\e101";
+}
+.icon-Download:before {
+  content: "\e90c";
+}
+.icon-recherche:before {
+  content: "\f007";
+  padding-right: 5px;
+}
+.icon-uniF1C3:before {
+  content: "\f1c3";
+}
+.icon-uni6C:before {
+  content: "\6c";
+   padding-right: 5px;
+}
+.icon-uniE019:before {
+  content: "\e019";
+  padding-right: 5px;
+}
+.icon-recherche, .icon-new{
+    color: #000000;
+    cursor: pointer;
+}
+.icon-recherche:hover, .icon-new:hover{
+color: red;
+}
+
+a.icon-uni6C {
+    font-size: 19px;
+    color: #000000;
+    text-decoration: none;
+    margin: 7px;
+    line-height: 30px;
+}
+a.icon-uni6C:hover,a.icon-uniE019:hover {
+    color: red;
+}
+a.icon-uniE019 {
+    font-size: 19px;
+    color: #000000;
+    text-decoration: none;
+    margin: 7px;
+    line-height: 30px;
+}
+
+body{
+	background: #adcdfe;
+}
+.content{
+	background: #ffffff;
+}
+
+.header-class {
+    background: #fff;
+    border-radius: 13px 13px 0 0;
+    display: -webkit-inline-box;
+    width: 100%;
+
+}
+.header-class img {
+    width: 83%;
+    padding: 23px;
+}
+.header-class p {
+    text-align: center;
+    width: 60%;
+    font-size: 60px;
+    text-decoration: underline;
+}
+.btn_ajout{
+    position: absolute;
+    top: 231px;
+    right: 48px;
+}
+fieldset {
+    border-color: #adcdfe;
+    float: right;
+    margin-top: 10px;
+    margin-right: -3px;
+}
+h3 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 5px;
+    color: red;
+    display: inline-block;
+    margin-top: 8px;
+    padding-left: 15px;
+}
+ div.tab {
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 0 0 0 27px;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: #1c3f65;
+    border-radius: 13px 13px 0 0;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    float: left;
+    outline: none;
+    cursor: pointer;
+    padding: 9px 0;
+    transition: 0.3s;
+    width: 120px;
+    border: none;
+    margin-right: 3px;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: red;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: red;
+    border-radius: 13px 13px 0 0;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    background: #ffffff;
+    border-radius: 0 0 10px 10px;
+    float: left;
+    min-height: 675px;
+}
+ td{
+    border: 1px solid #adcdfe;
+    width: 228px;
+    padding-left: 10px;
+  }
+ td.table_title {
+    background: #adcdfe;
+    font-size: 18px;
+    color: #000000;
+    font-weight: 600;
+}
+td.interval{
+	    background: rgba(220, 220, 220, 0.29);
+}
+table{    
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.contenu-recherche {
+    border: 2px solid #000000;
+    margin: -6px 15px 0 15px;
+}
+div.contenu {
+    margin: 15px;
+}
+.rupture{
+  background: red;
+}
+.achat{
+  background: rgba(158, 158, 158, 0.73);
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+.pagination {
+    float: right;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
