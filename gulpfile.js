@@ -14,6 +14,10 @@ var gulp = require('gulp'),
     gulp.task('css', function(){
         gulp.src([
             // all css and less sources
+
+           // './node_modules/bootstrap/dist/css/bootstrap.min.css',
+            //'./node_modules/eonasdan-bootstrap-datetimepicker/src/less/_bootstrap-datetimepicker.less',
+            //'./node_modules/eonasdan-bootstrap-datetimepicker/src/less/bootstrap-datetimepicker-build.less',
            // './web/src/css/style.css',
             './app/Resources/public/css/*.css',
 
@@ -29,8 +33,16 @@ var gulp = require('gulp'),
     gulp.task('js',function () {
         gulp.src([
             // all js sources
-            //'./web/src/js/login.js',
+            /* lib */
+            './node_modules/jquery/dist/jquery.js',
+            './node_modules/bootstrap/dist/js/bootstrap.js',
+            './node_modules/moment/min/moment-with-locales.js',
+            './node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+            './node_modules/selectize/dist/js/standalone/selectize.js',
+            /* app */
             './app/Resources/public/js/*.js',
+            /* StockBundle */
+            './src/StockBundle/Resources/public/js/ux.js',
         ])
             .pipe(concat('app.min.js'))
             //.pipe(uglify()) //Retire la minification pendant le dev pour verification debug du js
