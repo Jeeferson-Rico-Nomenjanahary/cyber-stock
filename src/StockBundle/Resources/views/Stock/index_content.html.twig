@@ -46,7 +46,7 @@
                 {% endfor %}
 
                 {% set stock_quantite = total_quantite_achat -  total_quantite_vente%}
-                {% if (stock_quantite <=1 ) %}
+                {% if (stock_quantite <= rupture ) %}
                     {% set class_color = 'rupture' %}
                     {% set commentaire = 'Rupture de stock' %}
                 {% endif %}
