@@ -2,28 +2,31 @@
     <div class="btn_ajout" >
         <span class="icon-new btn-connex"><a href="{{ path('achat_add') }}">Nouveaux</a></span>
     </div>
-    <div class="contenu-recherche">
-        <fieldset>
-            <legend>Recherche</legend>
-            <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" style="display: inline-block;">
-                <label>Date: </label>
-                <label>Du</label><input class="form-control" type="text" name="date" readonly />
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <label>Au</label><input class="form-control" type="text" name="date" readonly />
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>
+    <form action="{{ path('achat_index') }}" method="GET">
+        <div class="contenu-recherche">
+            <fieldset>
+                <legend>Recherche</legend>
+                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" style="display: inline-block;">
+                    <label>Date: </label>
+                    <label>Du</label><input class="form-control" type="text" name="dates[from]" value="{% if dates['from'] is defined %}{{ dates['from'] }}{% endif %}"  />
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    <label>Au</label><input class="form-control" type="text" name="dates[to]" value="{% if dates['to'] is defined %}{{ dates['to'] }}{% endif %}"  />
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
 
-            <div style="display: inline-block;">
-                <span class="form-label-content">Achat</span>
-                <input  type="text" name="Article" id="Article">
-                <label for="Article" class="form-label">
+                <div style="display: inline-block;">
+                    <span class="form-label-content">Achat</span>
+                    <input  type="text" name="filters[a.name]" id="Article" value="{% if currentFilters['a.name'] is defined %}{{ currentFilters['a.name'] }}{% endif %}">
+                    <label for="Article" class="form-label">
 
-                </label>
-            </div>
-            <span class="icon-recherche">Recherche</span>
+                    </label>
+                </div>
+                <button class="btn btn-first" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
 
-        </fieldset>
-    </div>
+            </fieldset>
+        </div>
+    </form>
+
 <h3>liste des Achat</h3>
 <div class="contenu">
     <table>

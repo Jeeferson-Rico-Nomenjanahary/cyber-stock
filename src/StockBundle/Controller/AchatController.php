@@ -55,6 +55,8 @@ class AchatController extends Controller
 
         return $this->render('StockBundle:Achat:index.html.twig', array(
             'achats' => $achats,
+            'currentFilters'    => $filters,
+            'dates'             => $dates,
         ));
     }
 

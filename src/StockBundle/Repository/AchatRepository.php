@@ -13,46 +13,47 @@ class AchatRepository extends \Doctrine\ORM\EntityRepository
 
     public function findAchat( $sort, $filters = null, $dates = null) {
         $dql = '
-                SELECT ach FROM StockBundle:Achat ach JOIN ach.article art
+                SELECT ach FROM StockBundle:Achat ach 
             
              ';
         //$dqlWhere = 'WHERE u.id = :id';
         $dqlWhere = '';
         $dqlFilters = "";
-        /*if($filters != null) {
+
+        if($filters != null) {
+
             foreach ($filters as $key => $value) {
                 $value = str_replace(['\''], ['\'\''],$value);
-                if ($key == 'k.id') {
+                if ($key == 'a.name') {
                     if (trim($value) != "") {
-                        $dql .= 'INNER JOIN kr.kpi k ';
-                        $dqlFilters .= " AND " . $key . " LIKE '%" . $value . "%'";
+                        $dqlWhere = 'WHERE ';
+                        $dql .= 'JOIN ach.article a ';
+                        $dqlFilters .= " " . $key . " LIKE '%" . $value . "%'";
                     }
-                } else if ($key == "ra.id") {
-                    if (trim($value) != "") {
-                        $dql .= 'INNER JOIN rr.rapport ra ';
-                        $dqlFilters .= " AND " . $key . " LIKE '%" . $value . "%'";}
-
-                } else {
-                    $dqlFilters .= " AND " . $key . " LIKE '%" . $value . "%'";
                 }
             }
-        }*/
+        }
         $dql = $dql . " " . $dqlWhere . " " . $dqlFilters;
 
-        /*if ($dates != null) {
+        if ($dates != null) {
+            $and = $dqlWhere == '' ? 'WHERE ': 'AND ';
             if ($dates['from'] != '') {
                 $date = \DateTime::createFromFormat("d/m/Y", $dates['from']);
-                $dql .= " AND r.createdAt >= '".$date->format('Y-m-d 00:00:00')."'";
+
+                $dql .= $and." ach.createdAt >= '".$date->format('Y-m-d 00:00:00')."'";
             }
             if ($dates['to'] != '') {
                 $date = \DateTime::createFromFormat("d/m/Y", $dates['to']);
-                $dql .= " AND r.createdAt <= '".$date->format('Y-m-d 23:59:59')."'";
+                $dql .= "AND ach.createdAt <= '".$date->format('Y-m-d 23:59:59')."'";
             }
-        }*/
+        }
 
         //$dql .= ' ORDER BY r.'.$sort[0].' '.$sort[1];
 
         $query = $this->getEntityManager()->createQuery($dql);
+        /*echo'<pre>';
+        echo($query->getSql());
+        echo'</pre>';die;*/
 
         return $query->getResult();
     }
