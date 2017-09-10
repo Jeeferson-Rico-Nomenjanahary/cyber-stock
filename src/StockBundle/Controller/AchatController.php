@@ -28,7 +28,7 @@ class AchatController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $achats = $em->getRepository('StockBundle:Achat')->findAll();
+
         $itemsPerPage = $this->container->getParameter('per_page');
         $repository = $em->getRepository('StockBundle:Achat');
 

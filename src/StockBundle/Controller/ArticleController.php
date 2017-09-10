@@ -23,14 +23,30 @@ class ArticleController extends Controller
      * @Route("/", name="article_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $articles = $em->getRepository('StockBundle:Article')->findAll();
+        $itemsPerPage = $this->container->getParameter('per_page');
+        $repository = $em->getRepository('StockBundle:Article');
+
+        $sort = array($request->query->get('sort', ''), $request->query->get('direction', 'asc'));
+        $filters = null;
+        if (isset($_REQUEST['filters'])) {
+            $filters = $_REQUEST['filters'];
+        }
+
+        $articles = $repository->findArticle($sort, $filters);
+
+        $articles = $this->get('knp_paginator')->paginate(
+            $articles,
+            $request->query->getInt('page', 1),
+            $itemsPerPage
+        );
 
         return $this->render('StockBundle:Article:index.html.twig', array(
             'articles' => $articles,
+            'currentFilters'    => $filters,
         ));
     }
 
