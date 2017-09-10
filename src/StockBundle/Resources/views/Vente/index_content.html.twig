@@ -1,8 +1,8 @@
 <div id="vente" class="tabcontent " style="display: block;">
     <div class="btn_ajout" >
-        <span class="icon-new btn-connex"><a href="{{ path('achat_add') }}">Nouveaux</a></span>
+        <span class="icon-new btn-connex"><a href="{{ path('vente_add') }}">Nouveaux</a></span>
     </div>
-    <form action="{{ path('achat_index') }}" method="GET">
+    <form action="{{ path('vente_index') }}" method="GET">
         <div class="contenu-recherche">
             <fieldset>
                 <legend>Recherche</legend>
@@ -15,7 +15,7 @@
                 </div>
 
                 <div style="display: inline-block;">
-                    <span class="form-label-content">Achat</span>
+                    <span class="form-label-content">Vente</span>
                     <input  type="text" name="filters[a.name]" id="Article" value="{% if currentFilters['a.name'] is defined %}{{ currentFilters['a.name'] }}{% endif %}">
                     <label for="Article" class="form-label">
 
@@ -27,37 +27,37 @@
         </div>
     </form>
 
-<h3>liste des Achat</h3>
+<h3>liste des Ventes</h3>
 <div class="contenu">
-    {% if achats|length > 0 %}
+    {% if ventes|length > 0 %}
         <table>
             <tbody>
             <tr>
-                <td class="table_title">{{ knp_pagination_sortable(achats, 'Date', 'ach.createdAt') }}</td>
-                <td class="table_title">{{ knp_pagination_sortable(achats, 'Article', 'a.name') }}</td>
+                <td class="table_title">{{ knp_pagination_sortable(ventes, 'Date', 'ven.createdAt') }}</td>
+                <td class="table_title">{{ knp_pagination_sortable(ventes, 'Article', 'a.name') }}</td>
                 <td class="table_title">Description</td>
-                <td class="table_title">{{ knp_pagination_sortable(achats, 'Quantite', 'ach.quantite') }}</td>
-                <td class="table_title">{{ knp_pagination_sortable(achats, "Prix d'achat", 'ach.prixUnitaire') }}</td>
-                <td class="table_title">Prix d'achat total </td>
+                <td class="table_title">{{ knp_pagination_sortable(ventes, 'Quantite', 'ven.quantite') }}</td>
+                <td class="table_title">{{ knp_pagination_sortable(ventes, "Prix d'vente", 'ven.prixUnitaire') }}</td>
+                <td class="table_title">Prix de vente total </td>
                 <td class="table_title">Action</td>
             </tr>
-            {% for achat in achats %}
+            {% for vente in ventes %}
                 <tr>
-                    <td class="interval">{{ achat.createdAt|date('d/m/Y') }}</td>
-                    <td class="interval">{{ achat.article.name }}</td>
-                    <td class="interval">{{ achat.article.description }}</td>
-                    <td class="interval">{{ achat.quantite }}</td>
-                    <td class="interval">{{ achat.prixUnitaire }}</td>
-                    <td class="interval">{{ achat.prixUnitaire * achat.quantite }}</td>
-                    <td class="interval"><a href="{{ path('achat_edit', { 'id': achat.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                    <td class="interval">{{ vente.createdAt|date('d/m/Y') }}</td>
+                    <td class="interval">{{ vente.article.name }}</td>
+                    <td class="interval">{{ vente.article.description }}</td>
+                    <td class="interval">{{ vente.quantite }}</td>
+                    <td class="interval">{{ vente.prixUnitaire }}</td>
+                    <td class="interval">{{ vente.prixUnitaire * vente.quantite }}</td>
+                    <td class="interval"><a href="{{ path('vente_edit', { 'id': vente.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
         <div class="navigation">
-            {{ knp_pagination_render(achats) }}
+            {{ knp_pagination_render(ventes) }}
         </div>
-    {% else %}
+        {% else %}
         Pas de contenu disponible
     {% endif %}
 

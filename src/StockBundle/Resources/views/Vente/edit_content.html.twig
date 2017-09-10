@@ -1,0 +1,17 @@
+<form action="{{ path("vente_edit", {'id': vente.id}) }}" method="post">
+    <div class="login">
+        <p>Modification d'une vente</p>
+        <select name="_ventearticle">
+            {% for article in articles %}
+                <option value="{{ article.id }}" {% if (article.id == vente.article.id) %} selected {% endif %}>{{ article.name}}</option>
+            {% endfor %}
+        </select>
+        Date vente : <input type="text" name="_ventedate" class="datepicker" value="{{ vente.createdAt|date }}" placeholder="{{ vente.createdAt|date('d/m/Y') }}">
+        Quantité : <input type="number" id="ventequantite" name="_ventequantite" required="required" value="{{ vente.quantite }}" /></td>
+        Prix Unitaire : <input type="number" id="venteprixunitaire" name="_venteprixunitaire" required="required" value="{{ vente.prixUnitaire }}"/></td>
+
+        <div align="center">
+            <input  class="btn-connex"  type="submit" id="_submit" name="_submit" value="Valider" />
+        </div>
+    </div>
+</form>

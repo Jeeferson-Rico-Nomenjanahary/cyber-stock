@@ -120,7 +120,7 @@ class Achat
     }
 
     /**
-     * Set articleId
+     * Set article
      *
      * @param \StockBundle\Entity\Article $article
      *
@@ -134,7 +134,7 @@ class Achat
     }
 
     /**
-     * Get articleId
+     * Get article
      *
      * @return \StockBundle\Entity\Article
      */

@@ -20,23 +20,28 @@
 
 <h3>liste des Articles</h3>
 <div class="contenu">
-    <table>
-        <tbody>
-        <tr>
-            <td class="table_title">{{ knp_pagination_sortable(articles, 'Nom', 'name') }}</td>
-            <td class="table_title">Description</td>
-            <td class="table_title">Action</td>
-        </tr>
-        {% for article in articles %}
+    {% if articles|length > 0 %}
+        <table>
+            <tbody>
             <tr>
-                <td class="interval">{{ article.name }}</td>
-                <td class="interval">{{ article.description }}</td>
-                <td class="interval"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                <td class="table_title">{{ knp_pagination_sortable(articles, 'Nom', 'name') }}</td>
+                <td class="table_title">Description</td>
+                <td class="table_title">Action</td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="navigation">
-        {{ knp_pagination_render(articles) }}
-    </div>
+            {% for article in articles %}
+                <tr>
+                    <td class="interval">{{ article.name }}</td>
+                    <td class="interval">{{ article.description }}</td>
+                    <td class="interval"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(articles) }}
+        </div>
+    {% else %}
+        Pas de contenu disponible
+    {% endif %}
+
 </div>

@@ -1,0 +1,18 @@
+<form action="{{ path("vente_add") }}" method="post">
+    <div class="login">
+        <p>Ajout d'une Vente</p>
+
+        <select name="_ventearticle">
+            {% for article in articles %}
+                <option value="{{ article.id }}">{{ article.name}}</option>
+            {% endfor %}
+        </select>
+        Date de vente : <input type="text" name="_ventedate" class="datepicker">
+        Quantité : <input type="number" id="ventequantite" name="_ventequantite" required="required" /></td>
+        Prix Unitaire : <input type="number" id="venteprixunitaire" name="_venteprixunitaire" required="required" /></td>
+
+        <div align="center">
+            <input  class="btn-connex"  type="submit" id="_submit" name="_submit" value="Valider" />
+        </div>
+    </div>
+</form>

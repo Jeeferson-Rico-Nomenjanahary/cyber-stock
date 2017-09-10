@@ -10,4 +10,52 @@ namespace StockBundle\Repository;
  */
 class VenteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findVente( $sort, $filters = null, $dates = null) {
+        $dql = '
+                SELECT ven FROM StockBundle:Vente ven 
+                JOIN ven.article a 
+            
+             ';
+        $dqlWhere = '';
+        $dqlFilters = "";
+
+        if($filters != null) {
+
+            foreach ($filters as $key => $value) {
+                $value = str_replace(['\''], ['\'\''],$value);
+                if ($key == 'a.name') {
+                    if (trim($value) != "") {
+                        $dqlWhere = 'WHERE ';
+                        $dqlFilters .= " " . $key . " LIKE '%" . $value . "%'";
+                    }
+                }
+            }
+        }
+        $dql = $dql . " " . $dqlWhere . " " . $dqlFilters;
+
+        if ($dates != null) {
+            $and = $dqlWhere == '' ? 'WHERE ': 'AND ';
+            if ($dates['from'] != '') {
+                $date = \DateTime::createFromFormat("d/m/Y", $dates['from']);
+
+                $dql .= $and." ach.createdAt >= '".$date->format('Y-m-d 00:00:00')."'";
+            }
+            if ($dates['to'] != '') {
+                $date = \DateTime::createFromFormat("d/m/Y", $dates['to']);
+                $dql .= "AND ach.createdAt <= '".$date->format('Y-m-d 23:59:59')."'";
+            }
+        }
+
+        if ($sort[0] != '' && $sort[1] !=''){
+            $dql .= ' ORDER BY '.$sort[0].' '.$sort[1];
+
+        }
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        /*echo'<pre>';
+        echo($query->getSql());
+        echo'</pre>';*/
+
+        return $query->getResult();
+    }
 }
