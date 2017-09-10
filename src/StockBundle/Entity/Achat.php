@@ -26,7 +26,7 @@ class Achat
      *
      * @ORM\ManyToOne(targetEntity="StockBundle\Entity\Article", inversedBy="achats")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="article_id", referencedColumnName="id",unique=false,onDelete="cascade")
+     *   @ORM\JoinColumn(name="article_id", referencedColumnName="id",unique=false)
      * })
      */
     private $article;
