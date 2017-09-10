@@ -34,14 +34,14 @@ class Achat
     /**
      * @var int
      *
-     * @ORM\Column(name="quantite", type="integer")
+     * @ORM\Column(name="quantite", type="integer", options={"default" = 0})
      */
     private $quantite;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="prix_unitaire", type="float")
+     * @ORM\Column(name="prix_unitaire", type="float", options={"default" = 0})
      */
     private $prixUnitaire;
 

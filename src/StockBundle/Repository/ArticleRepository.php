@@ -41,4 +41,42 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->getEntityManager()->createQuery($dql);
         return $query->getResult();
     }
+
+    public function findStock( $sort, $filters = null, $dates = null) {
+        $dql = '
+                SELECT art FROM StockBundle:Article art 
+                
+                LEFT JOIN art.vente v 
+                LEFT JOIN art.achat a 
+            
+             ';
+        /*$dqlWhere = '';
+        $dqlFilters = "";
+
+        if($filters != null) {
+
+            foreach ($filters as $key => $value) {
+                $value = str_replace(['\''], ['\'\''],$value);
+                if ($key == 'name') {
+                    if (trim($value) != "") {
+                        $dqlWhere = 'WHERE ';
+                        //$dql .= '';
+                        $dqlFilters .= " art." . $key . " LIKE '%" . $value . "%'";
+                    }
+                }
+            }
+        }
+        $dql = $dql . " " . $dqlWhere . " " . $dqlFilters;
+
+
+        if ($sort[0] != '' && $sort[1] !=''){
+            $dql .= ' ORDER BY art.'.$sort[0].' '.$sort[1];
+        }*/
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        echo'<pre>';
+        echo($query->getSql());
+        echo'</pre>';
+        return $query->getResult();
+    }
 }
