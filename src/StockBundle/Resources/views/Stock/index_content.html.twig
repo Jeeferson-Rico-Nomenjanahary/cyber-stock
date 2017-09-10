@@ -1,5 +1,4 @@
-{{ dump (stocks) }}
-{#<div id="stock" class="tabcontent " style="display: block;">
+<div id="stock" class="tabcontent " style="display: block;">
     <form action="{{ path('stock_stock_index') }}" method="GET">
         <div class="contenu-recherche">
             <fieldset>
@@ -24,13 +23,41 @@
             <tr>
                 <td class="table_title">{{ knp_pagination_sortable(stocks, 'Nom', 'name') }}</td>
                 <td class="table_title">Description</td>
-                <td class="table_title">Action</td>
+                <td class="table_title">Quantité</td>
+                <td class="table_title">Prix d'achat</td>
+                <td class="table_title">Prix de vente</td>
+                <td class="table_title">Commentaire</td>
             </tr>
             {% for stock in stocks %}
+                {% set stock_quantite = 0 %}
+                {% set total_quantite_achat = 0 %}
+                {% set total_quantite_vente = 0 %}
+                {% set total_prix_achat = 0 %}
+                {% set total_prix_vente = 0 %}
+                {% set class_color = 'interval' %}
+                {% set commentaire = '' %}
+                {% for achat in stock.achats %}
+                    {% set total_quantite_achat = total_quantite_achat + achat.quantite %}
+                    {% set total_prix_achat = total_prix_achat + (achat.quantite * achat.prixUnitaire) %}
+                {% endfor %}
+                {% for vente in stock.ventes %}
+                    {% set total_quantite_vente = total_quantite_vente + vente.quantite %}
+                    {% set total_prix_vente = total_prix_vente + (vente.quantite * vente.prixUnitaire) %}
+                {% endfor %}
+
+                {% set stock_quantite = total_quantite_achat -  total_quantite_vente%}
+                {% if (stock_quantite <=1 ) %}
+                    {% set class_color = 'rupture' %}
+                    {% set commentaire = 'Rupture de stock' %}
+                {% endif %}
                 <tr>
-                    <td class="interval">{{ stock.name }}</td>
-                    <td class="interval">{{ stock.description }}</td>
-                    <td class="interval"><a href="{{ path('stock_edit', { 'id': stock.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                    <td class="{{ class_color }}">{{ stock.name }}</td>
+                    <td class="{{ class_color }}">{{ stock.description }}</td>
+                    <td class="{{ class_color }}">{{ stock_quantite }}</td>
+                    <td class="{{ class_color }}">{{ total_prix_achat }}</td>
+                    <td class="{{ class_color }}">{{ total_prix_vente }}</td>
+                    <td class="{{ class_color }}">{{ commentaire }}</td>
+
                 </tr>
             {% endfor %}
             </tbody>
@@ -43,4 +70,4 @@
     {% endif %}
 
 </div>
-</div>#}
+</div>

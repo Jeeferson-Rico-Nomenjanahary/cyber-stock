@@ -24,9 +24,9 @@ class Vente
     /**
      * @var \Article
      *
-     * @ORM\ManyToOne(targetEntity="StockBundle\Entity\Article")
+     * @ORM\ManyToOne(targetEntity="StockBundle\Entity\Article", inversedBy="ventes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="article_id", referencedColumnName="id",unique=false)
+     *   @ORM\JoinColumn(name="article_id", referencedColumnName="id",unique=false,onDelete="cascade")
      * })
      */
     private $article;

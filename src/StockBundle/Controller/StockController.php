@@ -40,11 +40,11 @@ class StockController extends Controller
         $stocks = $repository->findStock($sort, $filters, $dates);
 
 
-        /*$stocks = $this->get('knp_paginator')->paginate(
+        $stocks = $this->get('knp_paginator')->paginate(
             $stocks,
             $request->query->getInt('page', 1),
             $itemsPerPage
-        );*/
+        );
 
         return $this->render('StockBundle:Stock:index.html.twig', array(
             'stocks' => $stocks,

@@ -45,12 +45,9 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
     public function findStock( $sort, $filters = null, $dates = null) {
         $dql = '
                 SELECT art FROM StockBundle:Article art 
-                
-                LEFT JOIN art.vente v 
-                LEFT JOIN art.achat a 
             
              ';
-        /*$dqlWhere = '';
+        $dqlWhere = '';
         $dqlFilters = "";
 
         if($filters != null) {
@@ -67,16 +64,10 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             }
         }
         $dql = $dql . " " . $dqlWhere . " " . $dqlFilters;
-
-
         if ($sort[0] != '' && $sort[1] !=''){
             $dql .= ' ORDER BY art.'.$sort[0].' '.$sort[1];
-        }*/
-
+        }
         $query = $this->getEntityManager()->createQuery($dql);
-        echo'<pre>';
-        echo($query->getSql());
-        echo'</pre>';
         return $query->getResult();
     }
 }

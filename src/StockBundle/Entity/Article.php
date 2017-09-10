@@ -48,6 +48,20 @@ class Article
      */
     private $modifyOn;
 
+    /**
+     * @var \Achat
+     *
+     * @ORM\OneToMany(targetEntity="StockBundle\Entity\Achat", mappedBy="article")
+     */
+    private $achats;
+
+    /**
+     * @var \Vente
+     *
+     * @ORM\OneToMany(targetEntity="StockBundle\Entity\Vente", mappedBy="article")
+     */
+    private $ventes;
+
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
@@ -158,5 +172,73 @@ class Article
     public function getModifyOn()
     {
         return $this->modifyOn;
+    }
+
+    /**
+     * Add achat
+     *
+     * @param \StockBundle\Entity\Achat $achat
+     *
+     * @return Article
+     */
+    public function addAchat(\StockBundle\Entity\Achat $achat)
+    {
+        $this->achats[] = $achat;
+
+        return $this;
+    }
+
+    /**
+     * Remove achat
+     *
+     * @param \StockBundle\Entity\Achat $achat
+     */
+    public function removeAchat(\StockBundle\Entity\Achat $achat)
+    {
+        $this->achats->removeElement($achat);
+    }
+
+    /**
+     * Get achats
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAchats()
+    {
+        return $this->achats;
+    }
+
+    /**
+     * Add vente
+     *
+     * @param \StockBundle\Entity\Vente $vente
+     *
+     * @return Article
+     */
+    public function addVente(\StockBundle\Entity\Vente $vente)
+    {
+        $this->ventes[] = $vente;
+
+        return $this;
+    }
+
+    /**
+     * Remove vente
+     *
+     * @param \StockBundle\Entity\Vente $vente
+     */
+    public function removeVente(\StockBundle\Entity\Vente $vente)
+    {
+        $this->ventes->removeElement($vente);
+    }
+
+    /**
+     * Get ventes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVentes()
+    {
+        return $this->ventes;
     }
 }
