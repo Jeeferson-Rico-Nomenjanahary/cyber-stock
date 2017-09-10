@@ -29,10 +29,10 @@ class AchatController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $achats = $em->getRepository('StockBundle:Achat')->findAll();
-        $itemsPerPage = 10; //$this->container->getParameter('per_page');
+        $itemsPerPage = $this->container->getParameter('per_page');
         $repository = $em->getRepository('StockBundle:Achat');
 
-        $sort = array($request->query->get('sort', 'orderNum'), $request->query->get('dir', 'asc'));
+        $sort = array($request->query->get('sort', ''), $request->query->get('direction', 'asc'));
         $filters = null;
         $dates = null;
 
@@ -47,11 +47,11 @@ class AchatController extends Controller
         $achats = $repository->findAchat($sort, $filters, $dates);
 
 
-        /*$achats = $this->get('knp_paginator')->paginate(
+        $achats = $this->get('knp_paginator')->paginate(
             $achats,
             $request->query->getInt('page', 1),
             $itemsPerPage
-        );*/
+        );
 
         return $this->render('StockBundle:Achat:index.html.twig', array(
             'achats' => $achats,

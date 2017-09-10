@@ -14,6 +14,7 @@ class AchatRepository extends \Doctrine\ORM\EntityRepository
     public function findAchat( $sort, $filters = null, $dates = null) {
         $dql = '
                 SELECT ach FROM StockBundle:Achat ach 
+                JOIN ach.article a 
             
              ';
         //$dqlWhere = 'WHERE u.id = :id';
@@ -27,7 +28,7 @@ class AchatRepository extends \Doctrine\ORM\EntityRepository
                 if ($key == 'a.name') {
                     if (trim($value) != "") {
                         $dqlWhere = 'WHERE ';
-                        $dql .= 'JOIN ach.article a ';
+                        //$dql .= '';
                         $dqlFilters .= " " . $key . " LIKE '%" . $value . "%'";
                     }
                 }
@@ -48,12 +49,17 @@ class AchatRepository extends \Doctrine\ORM\EntityRepository
             }
         }
 
-        //$dql .= ' ORDER BY r.'.$sort[0].' '.$sort[1];
+        if ($sort[0] != '' && $sort[1] !=''){
+            //var_dump($sort);echo '<br>';
+            //$dql .= ' ORDER BY ach.'.$sort[0].' '.$sort[1];
+            $dql .= ' ORDER BY '.$sort[0].' '.$sort[1];
+
+        }
 
         $query = $this->getEntityManager()->createQuery($dql);
         /*echo'<pre>';
         echo($query->getSql());
-        echo'</pre>';die;*/
+        echo'</pre>';*/
 
         return $query->getResult();
     }

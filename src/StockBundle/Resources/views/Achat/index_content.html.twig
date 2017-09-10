@@ -8,9 +8,9 @@
                 <legend>Recherche</legend>
                 <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" style="display: inline-block;">
                     <label>Date: </label>
-                    <label>Du</label><input class="form-control" type="text" name="dates[from]" value="{% if dates['from'] is defined %}{{ dates['from'] }}{% endif %}"  />
+                    <label>Du</label><input class="form-control datepicker" type="text" name="dates[from]" value="{% if dates['from'] is defined %}{{ dates['from'] }}{% endif %}"  />
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                    <label>Au</label><input class="form-control" type="text" name="dates[to]" value="{% if dates['to'] is defined %}{{ dates['to'] }}{% endif %}"  />
+                    <label>Au</label><input class="form-control datepicker" type="text" name="dates[to]" value="{% if dates['to'] is defined %}{{ dates['to'] }}{% endif %}"  />
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
 
@@ -32,11 +32,11 @@
     <table>
         <tbody>
         <tr>
-            <td class="table_title">Date</td>
-            <td class="table_title">Article</td>
+            <td class="table_title">{{ knp_pagination_sortable(achats, 'Date', 'ach.createdAt') }}</td>
+            <td class="table_title">{{ knp_pagination_sortable(achats, 'Article', 'a.name') }}</td>
             <td class="table_title">Description</td>
-            <td class="table_title">Quantite</td>
-            <td class="table_title">Prix d'achat</td>
+            <td class="table_title">{{ knp_pagination_sortable(achats, 'Quantite', 'ach.quantite') }}</td>
+            <td class="table_title">{{ knp_pagination_sortable(achats, "Prix d'achat", 'ach.prixUnitaire') }}</td>
             <td class="table_title">Prix d'achat total </td>
             <td class="table_title">Action</td>
         </tr>
@@ -53,4 +53,8 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(achats) }}
+    </div>
+</div>
 </div>
