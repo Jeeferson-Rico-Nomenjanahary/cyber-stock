@@ -70,4 +70,34 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->getEntityManager()->createQuery($dql);
         return $query->getResult();
     }
+
+    public function findInventaire($sort, $filters = null, $dates = null)
+    {
+        $dql = 'SELECT ach FROM StockBundle:Achat ach 
+                JOIN ach.article a 
+            
+             ';
+        $dqlWhere = '';
+        $dqlFilters = "";
+
+        if($filters != null) {
+
+            foreach ($filters as $key => $value) {
+                $value = str_replace(['\''], ['\'\''],$value);
+                if ($key == 'name') {
+                    if (trim($value) != "") {
+                        $dqlWhere = 'WHERE ';
+                        //$dql .= '';
+                        $dqlFilters .= " art." . $key . " LIKE '%" . $value . "%'";
+                    }
+                }
+            }
+        }
+        $dql = $dql . " " . $dqlWhere . " " . $dqlFilters;
+        if ($sort[0] != '' && $sort[1] !=''){
+            $dql .= ' ORDER BY art.'.$sort[0].' '.$sort[1];
+        }
+        $query = $this->getEntityManager()->createQuery($dql);
+        return $query->getResult();
+    }
 }
