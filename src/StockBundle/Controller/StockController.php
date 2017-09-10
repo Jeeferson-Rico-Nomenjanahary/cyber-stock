@@ -49,6 +49,7 @@ class StockController extends Controller
         return $this->render('StockBundle:Stock:index.html.twig', array(
             'stocks' => $stocks,
             'currentFilters'    => $filters,
+            'rupture'    => 1,
             'dates'             => $dates,
         ));
     }
