@@ -36,16 +36,19 @@ class InventaireController extends Controller
             $dates = $_REQUEST['dates'];
         }
 
-        $inventaires = $repository->findInventaire($sort, $filters, $dates);
+        //$inventaires = $repository->findInventaire($sort, $filters, $dates);
+        $entityManager = $this->get('doctrine.dbal.default_connection');
+        $inventaires = $repository->findInventaire($sort,$filters,$entityManager);
 
 
-        /*$inventaires = $this->get('knp_paginator')->paginate(
+        $inventaires = $this->get('knp_paginator')->paginate(
             $inventaires,
             $request->query->getInt('page', 1),
             $itemsPerPage
-        );*/
+        );
         return $this->render('StockBundle:Inventaire:index.html.twig', array(
             'inventaires' => $inventaires,
+            'currentFilters'    => $filters,
         ));
     }
 
