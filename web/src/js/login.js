@@ -1,14 +1,20 @@
-$(document).ready(function() {
-   $('body').removeClass('loading');
+function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
 
-    $('.bloc:gt(7)').hide();
-   
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
 
-   $(".voir_plus").click(function() {
-   		alert('zzzzz');
-   		
-	    var di="<div class=\'bloc bloc-contenu\' style=\'background: red;\'><img src=\'\'></img></div>";
-	    newItems = $(di).appendTo('.grid');
-	  $(".grid").isotope('insert', newItems );
-	});
-});
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "inline-block";
+    evt.currentTarget.className += " active";
+}
