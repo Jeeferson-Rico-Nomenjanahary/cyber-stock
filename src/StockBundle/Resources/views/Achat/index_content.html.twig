@@ -9,9 +9,9 @@
                 <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" style="display: inline-block;">
                     <label>Date: </label>
                     <label>Du</label><input class="form-control datepicker" type="text" name="dates[from]" value="{% if dates['from'] is defined %}{{ dates['from'] }}{% endif %}"  />
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
                     <label>Au</label><input class="form-control datepicker" type="text" name="dates[to]" value="{% if dates['to'] is defined %}{{ dates['to'] }}{% endif %}"  />
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    <!--span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
                 </div>
 
                 <div style="display: inline-block;">
@@ -60,6 +60,8 @@
     {% else %}
         Pas de contenu disponible
     {% endif %}
+</div>
 
 </div>
-</div>
+
+

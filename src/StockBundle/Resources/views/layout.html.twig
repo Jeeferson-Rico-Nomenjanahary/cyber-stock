@@ -6,8 +6,31 @@
     <link rel='stylesheet' href="{{ asset('css/style.min.css') }}">
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <script type="text/javascript">
+    
+    function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontentprod, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontentprod = document.getElementsByClassName("tabcontentprod");
+        for (i = 0; i < tabcontentprod.length; i++) {
+            tabcontentprod[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "inline-block";
+        evt.currentTarget.className += " active";
+    }
+</script>
 </head>
-    <body>
+    <body class="global">
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
@@ -17,10 +40,25 @@
                 {% endfor %}
             {% endfor %}
         {% endif %}
+        <div class="col-md-12 content-cyber">
+            <div class="col-md-2">
+                <img class="logo-cyber" src="{{ asset('img/logo.jpg')}}">
+                <ul class="corp-menu" >
+                    <li><a class="menu" href="http://127.0.0.1:8000/achat/">ACHAT</a></li>
+                    <li><a class="menu" href="http://127.0.0.1:8000/vente/">VENTE</a></li>
+                    <li><a class="menu" href="http://127.0.0.1:8000/">EN STOCK</a></li>
+                    <li><a class="menu" href="http://127.0.0.1:8000/inventaire/">IVENTAIRE</a></li>
+                </ul>
 
-        <div>
-            {% block article_content %}
-            {% endblock article_content %}
+            </div>
+
+            <div class="col-md-10 page-cyber">
+                {% block article_content %}
+                {% endblock article_content %}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p>test footer</p>
         </div>
         <script src="{{ asset('js/app.min.js')}}"></script>
         <script type="text/javascript">

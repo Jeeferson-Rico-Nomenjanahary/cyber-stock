@@ -1,4 +1,5 @@
 <div id="stock" class="tabcontent " style="display: block;">
+    <h3>liste des Stock</h3>
     <form action="{{ path('stock_stock_index') }}" method="GET">
         <div class="contenu-recherche">
             <fieldset>
@@ -15,7 +16,7 @@
         </div>
     </form>
 
-<h3>liste des Stock</h3>
+
 <div class="contenu">
     {% if stocks|length > 0 %}
         <table>
