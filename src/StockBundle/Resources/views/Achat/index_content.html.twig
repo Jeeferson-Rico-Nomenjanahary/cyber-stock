@@ -49,7 +49,7 @@
                     <td class="interval">{{ achat.quantite }}</td>
                     <td class="interval">{{ achat.prixUnitaire }}</td>
                     <td class="interval">{{ achat.prixUnitaire * achat.quantite }}</td>
-                    <td class="interval"><a href="{{ path('achat_edit', { 'id': achat.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                    <td class="interval"><a href="{{ path('achat_edit', { 'id': achat.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="{{ path('achat_delete', { 'id': achat.id }) }}" onclick="return confirm('Voulez vous supprimer l\'achat de l\'article {{ achat.article.name }} ?')"  class="icon-uniE019" title="Suppression">SUPPR</a></td>
                 </tr>
             {% endfor %}
             </tbody>

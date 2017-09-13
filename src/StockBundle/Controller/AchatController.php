@@ -146,4 +146,27 @@ class AchatController extends Controller
         return $newDateString;
 
     }
+
+    /**
+     * Delete a achat entity.
+     *
+     * @Route("/delete/{id}", name="achat_delete")
+     */
+
+    public function deleteAction(Request $request)
+    {
+
+        $achatId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $achat = $em->getRepository('StockBundle:Achat')->find($achatId);
+        if (!$achat) {
+            throw $this->createNotFoundException('No guest found');
+        }
+
+
+        $em->remove($achat);
+        $em->flush();
+
+        return $this->redirectToRoute('achat_index');
+    }
 }

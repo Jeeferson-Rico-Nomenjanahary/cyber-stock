@@ -114,4 +114,27 @@ class ArticleController extends Controller
         $em->flush();
 
     }
+
+    /**
+     * Delete a article entity.
+     *
+     * @Route("/delete/{id}", name="article_delete")
+     */
+
+    public function deleteAction(Request $request)
+    {
+
+        $articleId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('StockBundle:Article')->find($articleId);
+        if (!$article) {
+            throw $this->createNotFoundException('No guest found');
+        }
+
+
+        $em->remove($article);
+        $em->flush();
+
+        return $this->redirectToRoute('article_index');
+    }
 }
