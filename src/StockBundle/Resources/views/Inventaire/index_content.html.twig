@@ -9,8 +9,8 @@
                     <label style="display: inline-block;"> Action : </label>
                     <SELECT name="filters[type]"  >
                         <OPTION VALUE="" ></OPTION>
-                        <OPTION VALUE="achat" {% if currentFilters['type'] == 'achat' %} selected{% endif %}>Achat</OPTION>
-                        <OPTION VALUE="vente" {% if currentFilters['type'] == 'vente' %} selected{% endif %}>Vente</OPTION>
+                        <OPTION VALUE="achat" {% if (currentFilters['type'] is defined)  and (currentFilters['type'] == 'achat') %} selected{% endif %}>Achat</OPTION>
+                        <OPTION VALUE="vente" {% if (currentFilters['type'] is defined) and (currentFilters['type'] == 'vente') %} selected{% endif %}>Vente</OPTION>
                     </SELECT>
                     </label>
                 </div>
@@ -31,8 +31,8 @@
                 <tbody>
                 <tr>
                     <td class="table_title">Action</td>
-                    <td class="table_title">Date</td>
-                    <td class="table_title">Article</td>
+                    <td class="table_title">{{knp_pagination_sortable(inventaires, 'Date', 'date') }}</td>
+                    <td class="table_title">{{knp_pagination_sortable(inventaires, 'Article', 'article') }}</td>
                     <td class="table_title">Description</td>
                     <td class="table_title">Quantité</td>
                     <td class="table_title">Prix Unitaire</td>
@@ -41,27 +41,6 @@
                     <td class="table_title">Total</td>
                 </tr>
                 {% for inventaire in inventaires %}
-                    {#{% set stock_quantite = 0 %}
-                    {% set total_quantite_achat = 0 %}
-                    {% set total_quantite_vente = 0 %}
-                    {% set total_prix_achat = 0 %}
-                    {% set total_prix_vente = 0 %}
-                    {% set class_color = 'interval' %}
-                    {% set commentaire = '' %}
-                    {% for achat in stock.achats %}
-                        {% set total_quantite_achat = total_quantite_achat + achat.quantite %}
-                        {% set total_prix_achat = total_prix_achat + (achat.quantite * achat.prixUnitaire) %}
-                    {% endfor %}
-                    {% for vente in stock.ventes %}
-                        {% set total_quantite_vente = total_quantite_vente + vente.quantite %}
-                        {% set total_prix_vente = total_prix_vente + (vente.quantite * vente.prixUnitaire) %}
-                    {% endfor %}
-
-                    {% set stock_quantite = total_quantite_achat -  total_quantite_vente%}
-                    {% if (stock_quantite <= rupture ) %}
-                        {% set class_color = 'rupture' %}
-                        {% set commentaire = 'Rupture de stock' %}
-                    {% endif %}#}
                     {% if (inventaire['type'] == 'achat') %}
                         {% set prix_vente = '' %}
                         {% set prix_achat = inventaire['quantite'] * inventaire['prix_unitaire'] %}
