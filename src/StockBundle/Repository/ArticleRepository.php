@@ -120,7 +120,9 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
                 FROM cyber_vente vente JOIN cyber_article article ON vente.article_id = article.id " .$clauseWhere;
 
         }
-
+        if ($sort[0] != '' && $sort[1] !=''){
+            $sql .= ' ORDER BY '.$sort[0].' '.$sort[1];
+        }
 
 
 
