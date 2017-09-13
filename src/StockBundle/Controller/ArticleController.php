@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Article controller.
@@ -117,7 +119,7 @@ class ArticleController extends Controller
 
     /**
      * Delete a article entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/delete/{id}", name="article_delete")
      */
 
