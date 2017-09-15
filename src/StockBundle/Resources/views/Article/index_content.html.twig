@@ -1,38 +1,38 @@
 <div id="article" class="tabcontent " style="display: block;">
-    <div class="btn_ajout" >
-        <span class="icon-new btn-connex"><a href="{{ path('article_add') }}">Nouveaux</a></span>
-    </div>
+    <h3>liste des Articles</h3>
+    
     <form action="{{ path('article_index') }}" method="GET">
+
         <div class="contenu-recherche">
             <fieldset>
                 <legend>Recherche</legend>
-                <div style="display: inline-block;">
+                <div style="display: initial;">
                     <span class="form-label-content">Article</span>
                     <input  type="text"  id="Article" name="filters[name]" value="{% if currentFilters['name'] is defined %}{{ currentFilters['name'] }}{% endif %}">
                     <label for="Article" class="form-label">
 
                     </label>
                 </div>
-                <button class="btn btn-first" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
+                <button class="btn-connex" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
             </fieldset>
         </div>
     </form>
 
-<h3>liste des Articles</h3>
+
 <div class="contenu">
     {% if articles|length > 0 %}
         <table>
             <tbody>
-            <tr>
+            <tr class="article-tr">
                 <td class="table_title">{{ knp_pagination_sortable(articles, 'Nom', 'name') }}</td>
                 <td class="table_title">Description</td>
                 <td class="table_title">Action</td>
             </tr>
             {% for article in articles %}
-                <tr>
-                    <td class="interval">{{ article.name }}</td>
-                    <td class="interval">{{ article.description }}</td>
-                    <td class="interval"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                <tr class="article-tr">
+                    <td class="interval-article">{{ article.name }}</td>
+                    <td class="interval-article">{{ article.description }}</td>
+                    <td class="interval-article"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -44,4 +44,5 @@
         Pas de contenu disponible
     {% endif %}
 
+</div>
 </div>

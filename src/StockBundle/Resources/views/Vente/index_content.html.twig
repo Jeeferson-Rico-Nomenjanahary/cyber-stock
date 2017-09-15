@@ -1,33 +1,31 @@
 <div id="vente" class="tabcontent " style="display: block;">
-    <div class="btn_ajout" >
-        <span class="icon-new btn-connex"><a href="{{ path('vente_add') }}">Nouveaux</a></span>
-    </div>
+    <h3>liste des Ventes</h3>
     <form action="{{ path('vente_index') }}" method="GET">
         <div class="contenu-recherche">
             <fieldset>
                 <legend>Recherche</legend>
-                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" style="display: inline-block;">
-                    <label>Date: </label>
-                    <label>Du</label><input class="form-control datepicker" type="text" name="dates[from]" value="{% if dates['from'] is defined %}{{ dates['from'] }}{% endif %}"  />
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                    <label>Au</label><input class="form-control datepicker" type="text" name="dates[to]" value="{% if dates['to'] is defined %}{{ dates['to'] }}{% endif %}"  />
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" style="display: initial;">
+                    <label>Date : </label>
+                    <label>Du&nbsp;</label><input class=" datepicker" type="text" name="dates[from]" value="{% if dates['from'] is defined %}{{ dates['from'] }}{% endif %}"  />
+                    <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                    <label>Au&nbsp;</label><input class=" datepicker" type="text" name="dates[to]" value="{% if dates['to'] is defined %}{{ dates['to'] }}{% endif %}"  />
+                    <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
 
                 <div style="display: inline-block;">
-                    <span class="form-label-content">Vente</span>
+                    <span class="form-label-content">Vente :</span>
                     <input  type="text" name="filters[a.name]" id="Article" value="{% if currentFilters['a.name'] is defined %}{{ currentFilters['a.name'] }}{% endif %}">
                     <label for="Article" class="form-label">
 
                     </label>
                 </div>
-                <button class="btn btn-first" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
+                <button class="btn-connex" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
 
             </fieldset>
         </div>
     </form>
 
-<h3>liste des Ventes</h3>
+
 <div class="contenu">
     {% if ventes|length > 0 %}
         <table>
@@ -43,13 +41,13 @@
             </tr>
             {% for vente in ventes %}
                 <tr>
-                    <td class="interval">{{ vente.createdAt|date('d/m/Y') }}</td>
-                    <td class="interval">{{ vente.article.name }}</td>
-                    <td class="interval">{{ vente.article.description }}</td>
-                    <td class="interval">{{ vente.quantite }}</td>
-                    <td class="interval">{{ vente.prixUnitaire }}</td>
-                    <td class="interval">{{ vente.prixUnitaire * vente.quantite }}</td>
-                    <td class="interval"><a href="{{ path('vente_edit', { 'id': vente.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                    <td class="interval-vente">{{ vente.createdAt|date('d/m/Y') }}</td>
+                    <td class="interval-vente">{{ vente.article.name }}</td>
+                    <td class="interval-vente">{{ vente.article.description }}</td>
+                    <td class="interval-vente">{{ vente.quantite }}</td>
+                    <td class="interval-vente">{{ vente.prixUnitaire }}</td>
+                    <td class="interval-vente">{{ vente.prixUnitaire * vente.quantite }}</td>
+                    <td class="interval-vente"><a href="{{ path('vente_edit', { 'id': vente.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
                 </tr>
             {% endfor %}
             </tbody>

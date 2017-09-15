@@ -1,15 +1,16 @@
 <form action="{{ path("achat_edit", {'id': achat.id}) }}" method="post">
-    <div class="login">
+    <div class="Achat login">
         <p>Modification d'un achat</p>
-
-        <select name="_achatarticle">
-            {% for article in articles %}
-                <option value="{{ article.id }}" {% if (article.id == achat.article.id) %} selected {% endif %}>{{ article.name}}</option>
-            {% endfor %}
-        </select>
-        Date Achat : <input type="text" name="_achatdate" class="datepicker" value="{{ achat.createdAt|date('d/m/Y')}}" placeholder="{{ achat.createdAt|date('d/m/Y') }}">
-        Quantité : <input type="number" id="achatquantite" name="_achatquantite" required="required" value="{{ achat.quantite }}" /></td>
-        Prix Unitaire : <input type="number" id="achatprixunitaire" name="_achatprixunitaire" required="required" value="{{ achat.prixUnitaire }}"/></td>
+         <div class="libelle-achat"><label>Article :</label>
+            <select name="_achatarticle">
+                {% for article in articles %}
+                    <option value="{{ article.id }}" {% if (article.id == achat.article.id) %} selected {% endif %}>{{ article.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="libelle-achat"><label>Date Achat :</label> <input type="text" name="_achatdate" class="datepicker" value="{{ achat.createdAt|date('d/m/Y')}}" placeholder="{{ achat.createdAt|date('d/m/Y') }}"></div>
+        <div class="libelle-achat"><label>Quantité :</label> <input type="number" id="achatquantite" name="_achatquantite" required="required" value="{{ achat.quantite }}" /></div>
+        <div class="libelle-achat"><label>Prix Unitaire : </label><input type="number" id="achatprixunitaire" name="_achatprixunitaire" required="required" value="{{ achat.prixUnitaire }}"/></div>
 
         <div align="center">
             <input  class="btn-connex"  type="submit" id="_submit" name="_submit" value="Valider" />

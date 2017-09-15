@@ -1,33 +1,31 @@
 <div id="vente" class="tabcontent " style="display: block;">
-    <div class="btn_ajout" >
-        <span class="icon-new btn-connex"><a href="{{ path('achat_add') }}">Nouveaux</a></span>
-    </div>
+    <h3>liste des Achat</h3>
     <form action="{{ path('achat_index') }}" method="GET">
         <div class="contenu-recherche">
             <fieldset>
                 <legend>Recherche</legend>
-                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" style="display: inline-block;">
-                    <label>Date: </label>
-                    <label>Du</label><input class="form-control datepicker" type="text" name="dates[from]" value="{% if dates['from'] is defined %}{{ dates['from'] }}{% endif %}"  />
-                    <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
-                    <label>Au</label><input class="form-control datepicker" type="text" name="dates[to]" value="{% if dates['to'] is defined %}{{ dates['to'] }}{% endif %}"  />
-                    <!--span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
+                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" style="display: initial;">
+                    <label> Date : </label>
+                    <label> Du &nbsp;</label><input class=" datepicker" type="text" name="dates[from]" value="{% if dates['from'] is defined %}{{ dates['from'] }}{% endif %}"  />
+                    <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                    <label> Au &nbsp;</label><input class=" datepicker" type="text" name="dates[to]" value="{% if dates['to'] is defined %}{{ dates['to'] }}{% endif %}"  />
+                    <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
 
                 <div style="display: inline-block;">
-                    <span class="form-label-content">Achat</span>
+                    <span class="form-label-content">Achat : </span>
                     <input  type="text" name="filters[a.name]" id="Article" value="{% if currentFilters['a.name'] is defined %}{{ currentFilters['a.name'] }}{% endif %}">
                     <label for="Article" class="form-label">
 
                     </label>
                 </div>
-                <button class="btn btn-first" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
+                <button class="btn-connex" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
 
             </fieldset>
         </div>
     </form>
 
-<h3>liste des Achat</h3>
+
 <div class="contenu">
     {% if achats|length > 0 %}
         <table>
@@ -43,13 +41,13 @@
             </tr>
             {% for achat in achats %}
                 <tr>
-                    <td class="interval">{{ achat.createdAt|date('d/m/Y') }}</td>
-                    <td class="interval">{{ achat.article.name }}</td>
-                    <td class="interval">{{ achat.article.description }}</td>
-                    <td class="interval">{{ achat.quantite }}</td>
-                    <td class="interval">{{ achat.prixUnitaire }}</td>
-                    <td class="interval">{{ achat.prixUnitaire * achat.quantite }}</td>
-                    <td class="interval"><a href="{{ path('achat_edit', { 'id': achat.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                    <td class="interval-achat">{{ achat.createdAt|date('d/m/Y') }}</td>
+                    <td class="interval-achat">{{ achat.article.name }}</td>
+                    <td class="interval-achat">{{ achat.article.description }}</td>
+                    <td class="interval-achat">{{ achat.quantite }}</td>
+                    <td class="interval-achat">{{ achat.prixUnitaire }}</td>
+                    <td class="interval-achat">{{ achat.prixUnitaire * achat.quantite }}</td>
+                    <td class="interval-achat"><a href="{{ path('achat_edit', { 'id': achat.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -57,6 +55,7 @@
         <div class="navigation">
             {{ knp_pagination_render(achats) }}
         </div>
+
     {% else %}
         Pas de contenu disponible
     {% endif %}

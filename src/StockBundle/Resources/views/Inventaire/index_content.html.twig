@@ -1,12 +1,13 @@
 <div id="stock" class="tabcontent " style="display: block;">
+    <h3>Inventaire</h3>
     <form action="{{ path('stock_inventaire_index') }}" method="GET">
-
+        
         <div class="contenu-recherche">
             <fieldset>
                 <legend>Recherche</legend>
 
-                <div style="display: inline-block;">
-                    <label style="display: inline-block;"> Action : </label>
+                <div class="selecteur" style="display: inline-flex;">
+                    <label style="display: inline-block;"> Action :&nbsp; </label>
                     <SELECT name="filters[type]"  >
                         <OPTION VALUE="" ></OPTION>
                         <OPTION VALUE="achat" {% if (currentFilters['type'] is defined)  and (currentFilters['type'] == 'achat') %} selected{% endif %}>Achat</OPTION>
@@ -15,16 +16,16 @@
                     </label>
                 </div>
                 <div style="display: inline-block;">
-                    <span class="form-label-content">Article</span>
-                    <input  type="text"  id="Article" name="filters[name]" value="{% if currentFilters['name'] is defined %}{{ currentFilters['name'] }}{% endif %}">
+                    <span class="form-label-content">&nbsp;&nbsp;Article :&nbsp;</span>
+                    <input   type="text"  id="Article" name="filters[name]" value="{% if currentFilters['name'] is defined %}{{ currentFilters['name'] }}{% endif %}">
                 </div>
-                <button class="btn btn-first" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
+                <button class=" btn-connex" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
 
             </fieldset>
         </div>
     </form>
 
-    <h3>liste des Stock</h3>
+    
     <div class="contenu">
         {% if inventaires|length > 0 %}
             <table>
@@ -38,28 +39,38 @@
                     <td class="table_title">Prix Unitaire</td>
                     <td class="table_title">Prix d'achat</td>
                     <td class="table_title">Prix de vente</td>
-                    <td class="table_title">Total</td>
                 </tr>
                 {% for inventaire in inventaires %}
                     {% if (inventaire['type'] == 'achat') %}
                         {% set prix_vente = '' %}
                         {% set prix_achat = inventaire['quantite'] * inventaire['prix_unitaire'] %}
+                         <tr>
+                            <td class="interval-achat">{{ inventaire['type'] }}</td>
+                            <td class="interval-achat">{{ inventaire['date'] }}</td>
+                            <td class="interval-achat">{{ inventaire['article'] }}</td>
+                            <td class="interval-achat">{{ inventaire['description'] }}</td>
+                            <td class="interval-achat">{{ inventaire['quantite'] }}</td>
+                            <td class="interval-achat">{{ inventaire['prix_unitaire'] }}</td>
+                            <td class="interval-achat">{{ prix_achat }}</td>
+                            <td class="interval-achat">{{ prix_vente }} </td>
+
+                        </tr>
                     {% elseif (inventaire['type'] == 'vente') %}
                         {% set prix_achat = '' %}
                         {% set prix_vente = inventaire['quantite'] * inventaire['prix_unitaire'] %}
-                    {% endif %}
-                    <tr>
-                        <td class="interval">{{ inventaire['type'] }}</td>
-                        <td class="interval">{{ inventaire['date'] }}</td>
-                        <td class="interval">{{ inventaire['article'] }}</td>
-                        <td class="interval">{{ inventaire['description'] }}</td>
-                        <td class="interval">{{ inventaire['quantite'] }}</td>
-                        <td class="interval">{{ inventaire['prix_unitaire'] }}</td>
-                        <td class="interval">{{ prix_achat }}</td>
-                        <td class="interval">{{ prix_vente }} </td>
-                        <td class="interval">total</td>
+                        <tr>
+                            <td class="interval-vente">{{ inventaire['type'] }}</td>
+                            <td class="interval-vente">{{ inventaire['date'] }}</td>
+                            <td class="interval-vente">{{ inventaire['article'] }}</td>
+                            <td class="interval-vente">{{ inventaire['description'] }}</td>
+                            <td class="interval-vente">{{ inventaire['quantite'] }}</td>
+                            <td class="interval-vente">{{ inventaire['prix_unitaire'] }}</td>
+                            <td class="interval-vente">{{ prix_achat }}</td>
+                            <td class="interval-vente">{{ prix_vente }} </td>
 
-                    </tr>
+                        </tr>
+                    {% endif %}
+                    
                 {% endfor %}
                 </tbody>
             </table>

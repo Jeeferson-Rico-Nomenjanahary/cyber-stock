@@ -7,7 +7,7 @@
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
-    <body>
+    <body class="global">
         {#<div>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
@@ -18,7 +18,7 @@
                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
             {% endif %}
         </div>#}
-
+    <div class="col-md-12 content-cyber">
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
@@ -29,10 +29,13 @@
             {% endfor %}
         {% endif %}
 
-        <div>
+        <div class="password">
             {% block fos_user_content %}
             {% endblock fos_user_content %}
+            
         </div>
+        <img class="logo-cyber" src="{{ asset('img/maxresdefault.jpg')}}">
+    </div>
         <script src="{{ asset('js/app.min.js')}}"></script>
     </body>
 </html>

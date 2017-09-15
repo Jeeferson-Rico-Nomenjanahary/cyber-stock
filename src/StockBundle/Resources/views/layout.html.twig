@@ -41,25 +41,42 @@
             {% endfor %}
         {% endif %}
         <div class="col-md-12 content-cyber">
-            <div class="col-md-2">
-                <img class="logo-cyber" src="{{ asset('img/logo.jpg')}}">
-                <ul class="corp-menu" >
-                    <li><a class="menu" href="{{ path('achat_index') }}">ACHAT</a></li>
-                    <li><a class="menu" href="{{ path('vente_index') }}">VENTE</a></li>
-                    <li><a class="menu" href="{{ path('stock_stock_index') }}">EN STOCK</a></li>
-                    <li><a class="menu" href="{{ path('stock_inventaire_index') }}">INVENTAIRE</a></li>
-                </ul>
-
+            <div class="col-md-2 Menu">
+                <img class="logo-cyber-3e" src="{{ asset('img/logo.jpg')}}">
+                <nav class="navigation">
+                  <ul class="mainmenu">
+                    <li><a href="">ARTICLE</a>
+                    <ul class="submenu">
+                        <li><a href="{{ path('article_index') }}">Liste des Article</a></li>
+                        <li><a href="{{ path('article_add') }}">Nouvel Article</a></li>
+                      </ul></li>
+                    <li><a href="">ACHAT</a>
+                    <ul class="submenu">
+                        <li><a href="{{ path('achat_index') }}">Liste des Achat</a></li>
+                        <li><a href="{{ path('achat_add') }}">Nouvel Achat</a></li>
+                      </ul></li>
+                    <li><a href="{{ path('vente_index') }}">VENTE</a>
+                    <ul class="submenu">
+                        <li><a href="{{ path('vente_index') }}">Liste des Vente</a></li>
+                        <li><a href="{{ path('vente_add') }}">Nouvel Vente</a></li>
+                      </ul></li>
+                    <li><a href="{{ path('stock_stock_index') }}">EN STOCK</a>
+                      
+                    </li>
+                    <li><a href="{{ path('stock_inventaire_index') }}">INVENTAIRE</a></li>
+                    <li><a href="{{ path('fos_user_change_password') }}"> PROFIL</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">DECONNECTION</a></li>
+                  </ul>
+                </nav>
             </div>
 
             <div class="col-md-10 page-cyber">
                 {% block article_content %}
                 {% endblock article_content %}
             </div>
+            <img class="logo-cyber" src="{{ asset('img/maxresdefault.jpg')}}">
         </div>
-        <div class="col-md-12">
-            <p>test footer</p>
-        </div>
+        
         <script src="{{ asset('js/app.min.js')}}"></script>
         <script type="text/javascript">
             new Ux();

@@ -5,13 +5,13 @@
             <fieldset>
                 <legend>Recherche</legend>
                 <div style="display: inline-block;">
-                    <span class="form-label-content">Article</span>
+                    <span class="form-label-content">Article :</span>
                     <input  type="text"  id="Article" name="filters[name]" value="{% if currentFilters['name'] is defined %}{{ currentFilters['name'] }}{% endif %}">
                     <label for="Article" class="form-label">
 
                     </label>
                 </div>
-                <button class="btn btn-first" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
+                <button class=" btn-connex" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
             </fieldset>
         </div>
     </form>
@@ -71,4 +71,5 @@
     {% endif %}
 
 </div>
+
 </div>

@@ -1,15 +1,19 @@
 <form action="{{ path("achat_add") }}" method="post">
-    <div class="login">
-        <p>Ajout d'un Achat</p>
-
-        <select name="_achatarticle">
-            {% for article in articles %}
-                <option value="{{ article.id }}">{{ article.name}}</option>
-            {% endfor %}
-        </select>
-        Date Achat : <input type="text" name="_achatdate" class="datepicker">
-        Quantité : <input type="number" id="achatquantite" name="_achatquantite" required="required" /></td>
-        Prix Unitaire : <input type="number" id="achatprixunitaire" name="_achatprixunitaire" required="required" /></td>
+    <div class="Achat login">
+        <p>Nouvelle article</p>
+        <div class="libelle-achat"><label>Article :</label>
+                <select name="_achatarticle">
+                {% for article in articles %}
+                    <option value="{{ article.id }}">{{ article.name}}</option>
+                {% endfor %}
+            </select> 
+        </div>
+        
+        <div class="libelle-achat"><label>Date Achat :</label>  <input type="text" name="_achatdate" class="datepicker"></div>
+        <div class="libelle-achat"><label>Quantité :</label> <input type="number" id="achatquantite" name="_achatquantite" required="required" /></div>
+        <div class="libelle-achat"><label>Prix Unitaire :</label> <input type="number" id="achatprixunitaire" name="_achatprixunitaire" required="required" /></div>
+         
+         
         {#<div>
             <label for="artclename">nom</label>
             <input type="text" id="artclename" name="_artclename" required="required" /></td>
