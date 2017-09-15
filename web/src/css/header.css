@@ -1,7 +1,62 @@
+.logo-cyber-3e{
+	 width: 100%;
+    padding: 0 5px 5px 0;
+    background: #fff;
+    margin-bottom: 10px;
+}
 .logo-cyber{
-	width: 100%;
-    padding-top: 10px;
-    background-color: #000000;
-    padding: 5px;
-    margin-top: 21px;
+  width: 100%
+}
+.Menu{
+	/*background-color: rgba(0, 0, 0, 0.44);*/
+    border-radius: 10px;
+    margin: 0;
+    position: absolute !important;
+    z-index: 5;
+    padding-left: 0 !important;
+
+}
+/* define a fixed width for the entire menu */
+
+.navigation {
+  width: 98%;
+  margin-left: 5px;
+}
+.mainmenu, .submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mainmenu a {
+  display: block;
+  /*background-color: rgba(0, 0, 0, 0.44);*/
+  text-decoration: none;
+  padding: 10px;
+  color: #FFFFFF;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius:4px;
+}
+.mainmenu a:hover {
+    background-color: #f4f4f5;
+    text-decoration: none;
+}
+.mainmenu li:hover .submenu {
+  display: block;
+  max-height: 200px;
+  text-decoration: none;
+}
+.submenu a {
+  /*background-color: rgba(0, 0, 0, 0.44);*/
+  padding-left: 25px;
+  text-decoration: none;
+}
+.submenu a:hover {
+  background-color: #f4f4f5;
+  text-decoration: none;
+}
+.submenu {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
 }
