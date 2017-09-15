@@ -29,10 +29,14 @@
                 <td class="table_title">Action</td>
             </tr>
             {% for article in articles %}
-                <tr class="article-tr">
+                <tr>
                     <td class="interval-article">{{ article.name }}</td>
                     <td class="interval-article">{{ article.description }}</td>
-                    <td class="interval-article"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                    <td class="interval-article"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('article_delete', { 'id': article.id }) }}" onclick="return confirm('Voulez vous supprimer l\'article {{ article.name }} ?')"  class="icon-uniE019" title="Suppression">SUPPR</a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

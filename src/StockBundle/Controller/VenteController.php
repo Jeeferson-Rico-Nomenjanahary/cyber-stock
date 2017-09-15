@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Vente controller.
@@ -144,5 +146,28 @@ class VenteController extends Controller
         $newDateString = $myDateTime->format('Y-m-d H:i:s');
         return $newDateString;
 
+    }
+
+    /**
+     * Delete a vente entity.
+     *
+     * @Route("/delete/{id}", name="vente_delete")
+     */
+
+    public function deleteAction(Request $request)
+    {
+
+        $venteId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $vente = $em->getRepository('StockBundle:Vente')->find($venteId);
+        if (!$vente) {
+            throw $this->createNotFoundException('No guest found');
+        }
+
+
+        $em->remove($vente);
+        $em->flush();
+
+        return $this->redirectToRoute('vente_index');
     }
 }

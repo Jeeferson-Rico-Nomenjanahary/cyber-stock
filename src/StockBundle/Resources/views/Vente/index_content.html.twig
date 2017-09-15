@@ -47,7 +47,7 @@
                     <td class="interval-vente">{{ vente.quantite }}</td>
                     <td class="interval-vente">{{ vente.prixUnitaire }}</td>
                     <td class="interval-vente">{{ vente.prixUnitaire * vente.quantite }}</td>
-                    <td class="interval-vente"><a href="{{ path('vente_edit', { 'id': vente.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                    <td class="interval-vente"><a href="{{ path('vente_edit', { 'id': vente.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="{{ path('vente_delete', { 'id': vente.id }) }}" onclick="return confirm('Voulez vous supprimer la vente de l\'article {{ vente.article.name }} ?')" class="icon-uniE019" title="Suppression">SUPPR</a></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Achat controller.
@@ -145,5 +147,28 @@ class AchatController extends Controller
         $newDateString = $myDateTime->format('Y-m-d H:i:s');
         return $newDateString;
 
+    }
+
+    /**
+     * Delete a achat entity.
+     *
+     * @Route("/delete/{id}", name="achat_delete")
+     */
+
+    public function deleteAction(Request $request)
+    {
+
+        $achatId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $achat = $em->getRepository('StockBundle:Achat')->find($achatId);
+        if (!$achat) {
+            throw $this->createNotFoundException('No guest found');
+        }
+
+
+        $em->remove($achat);
+        $em->flush();
+
+        return $this->redirectToRoute('achat_index');
     }
 }

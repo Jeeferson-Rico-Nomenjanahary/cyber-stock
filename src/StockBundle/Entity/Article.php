@@ -51,14 +51,14 @@ class Article
     /**
      * @var \Achat
      *
-     * @ORM\OneToMany(targetEntity="StockBundle\Entity\Achat", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="StockBundle\Entity\Achat", mappedBy="article",cascade={"remove"})
      */
     private $achats;
 
     /**
      * @var \Vente
      *
-     * @ORM\OneToMany(targetEntity="StockBundle\Entity\Vente", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="StockBundle\Entity\Vente", mappedBy="article",cascade={"remove"})
      */
     private $ventes;
 
