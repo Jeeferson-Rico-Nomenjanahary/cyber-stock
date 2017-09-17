@@ -1,0 +1,80 @@
+<div id="vente" class="tabcontent " style="display: block;">
+    <h3>liste des Utilisateurst</h3>
+    <form action="{{ path('utilisateur_list') }}" method="GET">
+        <div class="contenu-recherche">
+            <fieldset>
+                <legend>Recherche</legend>
+
+                <div style="display: inline-block;">
+                    <span class="form-label-content">Identifiant : </span>
+                    <input  type="text" name="filters[username]" id="User" value="{% if currentFilters['username'] is defined %}{{ currentFilters['username'] }}{% endif %}">
+                    <label for="User" class="form-label">
+
+                    </label>
+                    <span class="form-label-content">Email : </span>
+                    <input  type="text" name="filters[email]" id="Useremail" value="{% if currentFilters['email'] is defined %}{{ currentFilters['email'] }}{% endif %}">
+                    <label for="Useremail" class="form-label">
+
+                    </label>
+                </div>
+                <button class="btn-connex" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
+
+            </fieldset>
+        </div>
+    </form>
+
+
+<div class="contenu">
+    {% if users|length > 0 %}
+        <table>
+            <tbody>
+            <tr>
+
+                <td class="table_title">{{ knp_pagination_sortable(users, 'Utilisateur', 'username') }}</td>
+                <td class="table_title">{{ knp_pagination_sortable(users, 'Email', 'email') }}</td>
+                <td class="table_title">Status</td>
+                <td class="table_title">Action</td>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td class="interval-user">{{ user.username }}</td>
+                    <td class="interval-user">{{ user.email }}</td>
+                    <td>
+                        {% if user.enabled %}
+                            <a class="edit"
+
+                                        href="{# path('user_user_setstate', {'id': user.id}) #}"
+                                        onclick="return confirm('Voulez vous désactiver cet utilisateur ?')"
+                                        data-toggle="tooltip"
+                                        title="Desactiver"
+                            >
+                                <span class="icon-PC_Activate"></span></a>
+                            <span class="">Activé</span>
+                        {% else %}
+                            <a class="edit"
+
+                               href="{# path('user_user_setstate', {'id': user.id}) #}"
+                               onclick="return confirm('Voulez vous activer cet utilisateur ?')"
+                               data-toggle="tooltip" title="Activer">
+                                <span
+                                        class="icon-PC_Disable"></span></a><span
+                                class="is-inactive">Desactivé</span>
+                        {% endif %}
+                    </td>
+                    <td class="interval-user"><a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(users) }}
+        </div>
+
+    {% else %}
+        Pas de contenu disponible
+    {% endif %}
+</div>
+
+</div>
+
+

@@ -10,4 +10,51 @@ namespace UtilisateurBundle\Repository;
  */
 class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function  findUtilisateur( $filters, $sort){
+
+        $dql = '
+                SELECT user FROM UtilisateurBundle:Utilisateur user 
+            
+             ';
+        $dqlFilters = "";
+        $dqlWhere = '';
+        $and = ' ';
+
+        if($filters != null) {
+
+
+
+            foreach ($filters as $key => $value) {
+                $value = str_replace(['\''], ['\'\''],$value);
+                if ($key == 'username') {
+                    if (trim($value) != "") {
+                        $dqlWhere = 'WHERE';
+                        $dqlFilters .= $dqlWhere." user." . $key . " LIKE '%" . $value . "%'";
+                    }
+                }
+                if ($key == 'email') {
+                    if($dqlWhere==""){
+                        $and = 'WHERE';
+                    } else {
+                        $and = 'AND';
+                    }
+                    if (trim($value) != "") {
+                        $dqlFilters .= $and." user." . $key . " LIKE '%" . $value . "%'";
+                    }
+                }
+            }
+        }
+        $dql = $dql . " " .  $dqlFilters;
+        if($sort != null) {
+            if ($sort[0] != '' && $sort[1] !=''){
+                $dql .= ' ORDER BY user.'.$sort[0].' '.$sort[1];
+
+            }
+        }
+
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->getResult();
+    }
 }
