@@ -49,4 +49,36 @@ class UtilisateurController extends Controller
         ));
     }
 
+    /**
+     * @Route("/{id}/setstate", name="utilisateur_setstate", requirements={"id": "\d+"})
+     */
+    public function setstateAction(Request $request)
+    {
+
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('UtilisateurBundle:Utilisateur');
+        $em = $this->getDoctrine()->getManager();
+        try {
+            $user = $repository->find($request->get('id'));
+            if ($user->isEnabled()) {
+                $state = 0;
+                $user->setEnabled($state);
+            } else {
+                $state = 1;
+                $user->setEnabled($state);
+            }
+
+            $em->persist($user);
+            $em->flush();
+
+        } catch (\Exception $o) {
+        }
+
+
+
+        return $this->redirectToRoute('utilisateur_list');
+
+    }
+
 }
