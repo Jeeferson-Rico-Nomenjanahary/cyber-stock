@@ -22,6 +22,11 @@ class UtilisateurController extends Controller
      */
     public function listAction(Request $request)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            //throw $this->createAccessDeniedException();
+            return $this->redirectToRoute('stock_stock_index');
+
+        }
         $em = $this->getDoctrine()->getManager();
 
         $itemsPerPage = $this->container->getParameter('per_page');

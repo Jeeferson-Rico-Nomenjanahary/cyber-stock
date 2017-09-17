@@ -74,9 +74,13 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: UtilisateurBundle\Entity\Utilisateur
+    #use_flash_notifications: false
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+    #registration:
+            #confirmation:
+                #enabled: true
 
 knp_paginator:
   default_options:

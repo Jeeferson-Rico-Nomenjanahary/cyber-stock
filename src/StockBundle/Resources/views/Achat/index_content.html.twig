@@ -37,7 +37,9 @@
                 <td class="table_title">{{ knp_pagination_sortable(achats, 'Quantite', 'ach.quantite') }}</td>
                 <td class="table_title">{{ knp_pagination_sortable(achats, "Prix d'achat", 'ach.prixUnitaire') }}</td>
                 <td class="table_title">Prix d'achat total </td>
-                <td class="table_title">Action</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td class="table_title">Action</td>
+                {% endif %}
             </tr>
             {% for achat in achats %}
                 <tr>
@@ -47,7 +49,12 @@
                     <td class="interval-achat">{{ achat.quantite }}</td>
                     <td class="interval-achat">{{ achat.prixUnitaire }}</td>
                     <td class="interval-achat">{{ achat.prixUnitaire * achat.quantite }}</td>
-                    <td class="interval-achat"><a href="{{ path('achat_edit', { 'id': achat.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>   <a href="" class="icon-uniE019" title="Suppression">SUPPR</a></td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td class="interval-achat">
+                                <a href="{{ path('achat_edit', { 'id': achat.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>
+                                <a href="" class="icon-uniE019" title="Suppression">SUPPR</a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

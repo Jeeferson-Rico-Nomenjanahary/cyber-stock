@@ -48,12 +48,16 @@
                     <li><a href="">ARTICLE</a>
                     <ul class="submenu">
                         <li><a href="{{ path('article_index') }}">Liste des Article</a></li>
-                        <li><a href="{{ path('article_add') }}">Nouvel Article</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('article_add') }}">Nouvel Article</a></li>
+                        {% endif %}
                       </ul></li>
                     <li><a href="">ACHAT</a>
                     <ul class="submenu">
                         <li><a href="{{ path('achat_index') }}">Liste des Achat</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="{{ path('achat_add') }}">Nouvel Achat</a></li>
+                        {% endif %}
                       </ul></li>
                     <li><a href="{{ path('vente_index') }}">VENTE</a>
                     <ul class="submenu">

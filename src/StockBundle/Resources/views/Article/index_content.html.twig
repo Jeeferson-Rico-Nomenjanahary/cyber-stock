@@ -26,17 +26,20 @@
             <tr class="article-tr">
                 <td class="table_title">{{ knp_pagination_sortable(articles, 'Nom', 'name') }}</td>
                 <td class="table_title">Description</td>
-                <td class="table_title">Action</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td class="table_title">Action</td>
+                {% end %}
             </tr>
             {% for article in articles %}
                 <tr>
                     <td class="interval-article">{{ article.name }}</td>
                     <td class="interval-article">{{ article.description }}</td>
-                    <td class="interval-article"><a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>
-                        {% if is_granted('ROLE_ADMIN') %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td class="interval-article">
+                            <a href="{{ path('article_edit', { 'id': article.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>
                             <a href="{{ path('article_delete', { 'id': article.id }) }}" onclick="return confirm('Voulez vous supprimer l\'article {{ article.name }} ?')"  class="icon-uniE019" title="Suppression">SUPPR</a>
-                        {% endif %}
-                    </td>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
