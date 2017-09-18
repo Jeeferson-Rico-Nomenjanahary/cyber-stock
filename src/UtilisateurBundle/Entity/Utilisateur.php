@@ -32,5 +32,13 @@ class Utilisateur extends BaseUser
     {
         return $this->id;
     }
+
+    public function hasRole($role)
+    {
+        if (in_array($role, $this->getRoles())) {
+            return true;
+        }
+        return false;
+    }
 }
 

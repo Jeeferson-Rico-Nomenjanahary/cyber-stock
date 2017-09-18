@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\UserBundle\FOSUserEvents;
 use UtilisateurBundle\Entity\Utilisateur;
+use UtilisateurBundle\Helper\RoleService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -84,6 +85,55 @@ class UtilisateurController extends Controller
 
         return $this->redirectToRoute('utilisateur_list');
 
+    }
+
+    /**
+     * Delete a user entity.
+     *
+     * @Route("/delete/{id}", name="user_delete")
+     */
+
+    public function deleteAction(Request $request)
+    {
+
+        $userId = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('UtilisateurBundle:Utilisateur')->find($userId);
+        if (!$user) {
+            throw $this->createNotFoundException('No user found');
+        }
+
+
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('utilisateur_list');
+    }
+
+    /**
+     * Promote or demote user
+     *
+     * @Route("/set-role/{id}", name="user_set_role")
+     */
+    public function setRoleAction(Request $request)
+    {
+        $userManager = $this->get('fos_user.user_manager');
+        $userId = $request->get('id');
+
+        // Use findUserby, findUserByUsername() findUserByEmail() findUserByUsernameOrEmail, findUserByConfirmationToken($token) or findUsers()
+        $user = $userManager->findUserBy(['id' => $userId]);
+        if($user->hasRole('ROLE_ADMIN')){
+            // Add the role that you want !
+            $user->addRole("ROLE_USER");
+        }else {
+            // Add the role that you want !
+            $user->addRole("ROLE_ADMIN");
+        }
+
+
+        // Update user roles
+        $userManager->updateUser($user);
+        return $this->redirectToRoute('utilisateur_list');
     }
 
 }
