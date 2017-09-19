@@ -8,7 +8,7 @@ For details on how to download and get started with Symfony, see the
 [Installation][1] chapter of the Symfony Documentation.
 
 
-Pr�-requis
+Pré-requis
 ========================
 - wamp server et php 7 : http://www.wampserver.com/
 - composer : https://getcomposer.org/
@@ -30,6 +30,9 @@ php bin/console server:run
 
 #les routes
 php bin/console debug:router
+#paramètres
+Ajouter dans parameters.yml
+-> per_page: 10
 
 
 
