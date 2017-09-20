@@ -34,6 +34,33 @@ php bin/console debug:router
 Ajouter dans parameters.yml
 -> per_page: 10
 
+Virtual Host
+========================
+Step 1
+aller dans C:\wamp\bin\apache\apache2.4.17\conf ;
+editer le fichier httpd.conf
+Rechercher " LoadModule vhost_alias_module " et décommenter
+Setp 2
+aller dans C:\wamp\bin\apache\apache2.4.17\conf\extra
+editer le fichier httpd-vhosts.conf puis ajouter
+<VirtualHost cyber-stock.local>
+    ServerAdmin webmaster@dummy-host2.example.com
+    DocumentRoot "c:/wamp/www/cyber-stock/web/app.php"
+    ServerName cyber-stock.local
+    ServerAlias www.cyber-stock.local
+    ErrorLog "logs/dummy-host2.example.com-error.log"
+    CustomLog "logs/dummy-host2.example.com-access.log" common
+</VirtualHost>
+
+Step 3 aller dans C:\Windows\System32\drivers\etc\
+editer le fichier host (admin) ajouter:
+127.0.0.1       cyber-stock.local
+(cyber-stock.local correspond au Server:Name de l'etape 2)
+
+
+#source https://john-dugan.com/wamp-vhost-setup/
+
+
 
 
 Enjoy!
