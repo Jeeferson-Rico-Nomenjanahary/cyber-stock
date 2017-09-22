@@ -132,9 +132,9 @@ fieldset {
     font-size: 18px;
 
 }
-div#datepicker {
+/*div#datepicker {
     width: 260px;
-}
+}*/
 .contenu-recherche legend,.contenu-recherche label,.contenu-recherche span{
   color: #fff;
   font-weight: 100 !important;
@@ -236,13 +236,17 @@ td.interval{
     
 }
 td.interval-achat{
-  background: #adcdfe;
-  border: 1px solid #fff;
+  background:  #faebd7;
+  border: 1px solid #adcdfe;
     
+}
+td.interval-vente-stock {
+    background: #adcdfe;
+    border: 1px solid #fff;
 }
 td.interval-vente {
     background: #faebd7;
-    border: 1px solid #fff;
+    border: 1px solid #adcdfe;
 }
 table{    
   border-collapse: collapse;
@@ -281,7 +285,34 @@ div.contenu {
 
 .pagination li:hover:not(.active) {background-color: #ddd;}*/
 
-
+/*---------------- utilisateurs et profil----------------------*/
+tr.utilisateur-tr td {
+    width: 21%;
+}
+td.interval-user {
+    background: #faebd7;
+}
+.fos_user_user_show {
+    display: inline-block;
+    padding: 25px 0;
+}
+.fos_user_user_show label{
+  margin-left: 12px !important;
+}
+.fos_user_user_show a {
+    background: #ffffff;
+    text-decoration: none !important;
+    padding: 7px;
+    border-radius: 5px;
+    float: right !important;
+    margin: 15px 6px 10px 6px !important;
+}
+.active{
+  color: red;
+}
+.desactive{
+  color: green;
+}
 
 /*----- achat-----*/
 input#Article {
@@ -292,11 +323,11 @@ input#Article {
     border: none;
 }
 td.interval-article {
-    background: rgb(92, 95, 97);
-    color: #fff;
+    background: #faebd7;
+    color: #000000;
 }
 td.interval-article a{
-  color: #fff;
+  color: #000000;
 }
 tr.article-tr td {
     width: 42%;
@@ -344,9 +375,9 @@ tr.article-tr td {
 .selectize-input.items.full.has-options.has-items.input-active input{
   display: none;
 }
-.bootstrap-datetimepicker-widget{
-width: 200px;
-}
+/*.bootstrap-datetimepicker-widget{
+width: 300px;
+}*/
 /*.selectize-input.items.full.has-options.has-items input {
     width: 179px!important;
     position: absolute;
@@ -365,13 +396,13 @@ width: 200px;
   width: 100%;
   padding: 7px;
 }
-.libelle-achat span{
+/*.libelle-achat span{
     width: 128px;
     color: #000;
     font-size: 18px;
     font-weight: 600;
     padding-top: 10px;
-}
+}*/
 .selectize-dropdown.single {
     /*top: 50px !important;*/
     position: absolute;
