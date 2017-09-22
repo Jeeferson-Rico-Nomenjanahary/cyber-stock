@@ -28,12 +28,12 @@
     {% if users|length > 0 %}
         <table>
             <tbody>
-            <tr>
+            <tr class="utilisateur-tr">
 
                 <td class="table_title">{{ knp_pagination_sortable(users, 'Utilisateur', 'username') }}</td>
                 <td class="table_title">{{ knp_pagination_sortable(users, 'Email', 'email') }}</td>
-                <td class="table_title">Status</td>
                 <td class="table_title">Rôle</td>
+                <td class="table_title">Status</td>
                 {% if is_granted('ROLE_ADMIN') %}
                     <td class="table_title">Action</td>
                 {% endif %}
@@ -42,7 +42,10 @@
                 <tr>
                     <td class="interval-user">{{ user.username }}</td>
                     <td class="interval-user">{{ user.email }}</td>
-                    <td>
+                    <td class="interval-user">
+                        {% if user.hasRole('ROLE_ADMIN') %} ADMIN {% else %} USER {% endif %}
+                    </td >
+                    <td class="interval-user">
                         {% if user.enabled %}
                             <a class="edit"
 
@@ -51,7 +54,7 @@
                                         data-toggle="tooltip"
                                         title="Desactiver"
                             >
-                                <span class="icon-PC_Activate">Activé</span></a>
+                                <span class="active">Activé</span></a>
                             {#<span class="">Activé</span>#}
                         {% else %}
                             <a class="edit"
@@ -60,13 +63,11 @@
                                onclick="return confirm('Voulez vous activer cet utilisateur ?')"
                                data-toggle="tooltip" title="Activer">
                                 <span
-                                        class="icon-PC_Disable">Desactivé</span></a>
+                                        class="desactive">Desactivé</span></a>
                             {#<span class="is-inactive">Desactivé</span>#}
                         {% endif %}
                     </td>
-                    <td>
-                        {% if user.hasRole('ROLE_ADMIN') %} ADMIN {% else %} USER {% endif %}
-                    </td>
+                    
                     {% if is_granted('ROLE_ADMIN') %}
                         <td class="interval-user">
                             <a href="{{ path('user_delete', { 'id': user.id }) }}" onclick="return confirm('Voulez vous supprimer l\'utilisateur {{ user.username }} ?')" class="icon-uniE019" title="Suppression">SUPPR</a>

@@ -59,14 +59,14 @@
                         {% set prix_achat = '' %}
                         {% set prix_vente = inventaire['quantite'] * inventaire['prix_unitaire'] %}
                         <tr>
-                            <td class="interval-vente">{{ inventaire['type'] }}</td>
-                            <td class="interval-vente">{{ inventaire['date'] }}</td>
-                            <td class="interval-vente">{{ inventaire['article'] }}</td>
-                            <td class="interval-vente">{{ inventaire['description'] }}</td>
-                            <td class="interval-vente">{{ inventaire['quantite'] }}</td>
-                            <td class="interval-vente">{{ inventaire['prix_unitaire'] }}</td>
-                            <td class="interval-vente">{{ prix_achat }}</td>
-                            <td class="interval-vente">{{ prix_vente }} </td>
+                            <td class="interval-vente-stock">{{ inventaire['type'] }}</td>
+                            <td class="interval-vente-stock">{{ inventaire['date'] }}</td>
+                            <td class="interval-vente-stock">{{ inventaire['article'] }}</td>
+                            <td class="interval-vente-stock">{{ inventaire['description'] }}</td>
+                            <td class="interval-vente-stock">{{ inventaire['quantite'] }}</td>
+                            <td class="interval-vente-stock">{{ inventaire['prix_unitaire'] }}</td>
+                            <td class="interval-vente-stock">{{ prix_achat }}</td>
+                            <td class="interval-vente-stock">{{ prix_vente }} </td>
 
                         </tr>
                     {% endif %}

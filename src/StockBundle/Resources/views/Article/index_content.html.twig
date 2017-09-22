@@ -28,7 +28,7 @@
                 <td class="table_title">Description</td>
                 {% if is_granted('ROLE_ADMIN') %}
                     <td class="table_title">Action</td>
-                {% end %}
+                {% endif %}
             </tr>
             {% for article in articles %}
                 <tr>
