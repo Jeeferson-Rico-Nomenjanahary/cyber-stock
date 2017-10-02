@@ -42,12 +42,12 @@
     padding-top: 2px;
     width: 294px;
     padding: 7px;
-    margin: 6px 6px 0 6px;
+    margin: 6px 6px 0 0;
     cursor: pointer;
 }
 .login .selectize-dropdown-content .option{
     width: 294px !important;
-    margin-left: 6px !important;
+    margin-left: 0 !important;
 }
 .login textarea {
     width: 295px;
@@ -79,6 +79,8 @@
     width: 294px;
     padding: 7px;
     margin: 6px;
+    margin-left: 0;
+
 }
 .logo-login img {
     width: 97%;
