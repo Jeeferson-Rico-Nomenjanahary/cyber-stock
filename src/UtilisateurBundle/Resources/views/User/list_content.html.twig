@@ -71,7 +71,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <td class="interval-user">
                             <a href="{{ path('user_delete', { 'id': user.id }) }}" onclick="return confirm('Voulez vous supprimer l\'utilisateur {{ user.username }} ?')" class="icon-uniE019" title="Suppression">SUPPR</a>
-                            {% if user.hasRole('ROLE_ADMIN') == false %}<a href="{{ path('user_set_role', { 'id': user.id }) }}" onclick="return confirm('Voulez vous changer le rôle de l\'utilisateur {{ user.username }} ?')" class="icon-uniE019"> Promouvoir </a> {% endif %}
+                            {% if user.hasRole('ROLE_ADMIN') == false %}<a href="{{ path('user_set_role', { 'id': user.id }) }}" onclick="return confirm('Voulez vous changer le rôle de l\'utilisateur {{ user.username }} ?')" class="icon-uni6C"> PROMOUVOIR </a> {% endif %}
                         </td>
                     {% endif %}
                 </tr>
