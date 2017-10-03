@@ -30,6 +30,7 @@
                     next: 'glyphicon glyphicon-menu-right'
                 }
             });
+            $('.datepicker').keydown(false);
             $(function () {
                 $('.date-from').datetimepicker();
                 $('.date-to').datetimepicker({
