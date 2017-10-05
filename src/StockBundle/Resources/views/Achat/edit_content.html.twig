@@ -8,7 +8,7 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="libelle-achat"><label>Date Achat :</label> <input type="text" name="_achatdate" class="datepicker" value="{{ achat.createdAt|date('d/m/Y')}}" placeholder="{{ achat.createdAt|date('d/m/Y') }}"></div>
+        <div class="libelle-achat"><label>Date Achat :</label> <input type="text" name="_achatdate" class="datepicker" value="{{ achat.createdAt|date('d/m/Y')}}"></div>
         <div class="libelle-achat"><label>Quantité :</label> <input type="number" id="achatquantite" name="_achatquantite" required="required" value="{{ achat.quantite }}" /></div>
         <div class="libelle-achat"><label>Prix Unitaire : </label><input type="number" id="achatprixunitaire" name="_achatprixunitaire" required="required" value="{{ achat.prixUnitaire }}"/></div>
 

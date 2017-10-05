@@ -10,7 +10,7 @@
             </select>
         </div>
         <div class="libelle-achat">
-            <label>Date vente :</label> <input type="text" name="_ventedate" class="datepicker" value="{{ vente.createdAt|date }}" placeholder="{{ vente.createdAt|date('d/m/Y') }}"></div>
+            <label>Date vente :</label> <input type="text" name="_ventedate" class="datepicker" value="{{ vente.createdAt|date('d/m/Y') }}" ></div>
         <div class="libelle-achat">
             <label>Quantité :</label> <input type="number" id="ventequantite" name="_ventequantite" required="required" value="{{ vente.quantite }}" /></div>
         <div class="libelle-achat">
