@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <title>{% block title %}3E Service Informatique{% endblock %}</title>
     <link rel='stylesheet' href="{{ asset('css/style.min.css') }}">
+    <!--<script type="text/javascript"  src="{{ asset('js/app.min.js') }}"></script>-->
     {% block stylesheets %}{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicontest.ico') }}" />
     <script type="text/javascript">
-    
+  
     function openCity(evt, cityName) {
         // Declare all variables
         var i, tabcontentprod, tablinks;
@@ -27,8 +28,15 @@
         // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(cityName).style.display = "inline-block";
         evt.currentTarget.className += " active";
+
+
     }
+
+       
+
+        
 </script>
+
 </head>
     <body class="global">
         {% if app.request.hasPreviousSession %}
@@ -80,7 +88,7 @@
                                   <li><a href="{{ path('fos_user_registration_register') }}">Nouvel utilisateur</a></li>
                               </ul></li>
                       {% endif %}
-                    <li><a href="{{ path('fos_user_security_logout') }}">DECONNECTION</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">DECONNEXION</a></li>
                   </ul>
                 </nav>
             </div>
@@ -96,5 +104,16 @@
         <script type="text/javascript">
             new Ux();
         </script>
+        
+      <script type="text/javascript">
+                $( "#filter .sortable" ).append( $( "<span class='icone-uniF07D'></span>" ) );
+                $( "#filter .asc" ).append( $( "<span class='icone-uniF15D'></span>" ) );
+                $( "#filter .desc" ).append( $( "<span class='icone-uniF15E'></span>" ) );
+
+                $( "#filter-date .sortable" ).append( $( "<span class='icone-uniF07D'></span>" ) );
+                $( "#filter-date .asc" ).append( $( "<span class='icone-uniF162'></span>" ) );
+                $( "#filter-date .desc" ).append( $( "<span class='icone-uniF163'></span>" ) );
+                            
+          </script>
     </body>
 </html>
