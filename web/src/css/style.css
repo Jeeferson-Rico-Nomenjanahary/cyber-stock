@@ -68,6 +68,57 @@
 .icon-recherche:hover, .icon-new:hover{
 color: #fff;
 }
+
+
+@font-face {
+  font-family: 'Helvetica';
+  src:  url('fonts/icomoon-filter.eot?dwizdf');
+  src:  url('fonts/icomoon-filter.eot?dwizdf#iefix') format('embedded-opentype'),
+    url('fonts/icomoon-filter.ttf?dwizdf') format('truetype'),
+    url('fonts/icomoon-filter.woff?dwizdf') format('woff'),
+    url('fonts/icomoon-filter.svg?dwizdf#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icone-"], [class*=" icone-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Helvetica' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icone-uniF07D:before {
+  content: "\f07d";
+  float: right;
+}
+.icone-uniF15D:before {
+  content: "\f15d";
+  float: right;
+}
+.icone-uniF15E:before {
+  content: "\f15e";
+  float: right;
+}
+.icone-uniF162:before {
+  content: "\f162";
+  float: right;
+}
+.icone-uniF163:before {
+  content: "\f163";
+  float: right;
+}
+
+
+
 @media (min-width: 992px){
   .col-md-10.page-cyber{
     width: 84.18% !important;
