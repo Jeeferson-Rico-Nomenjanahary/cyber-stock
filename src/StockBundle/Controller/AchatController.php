@@ -87,20 +87,37 @@ class AchatController extends Controller
         $em = $this->getDoctrine()->getManager();
         $data = $request->request;
 
-        $date  = new \DateTime();
-        $achatQuantite = $data->get('_achatquantite');
-        $achatPrixUnitaire = $data->get('_achatprixunitaire');
-        $achatArticle = $data->get('_achatarticle');
-        $article = $em->getRepository('StockBundle:Article')->find($achatArticle);
-        $achatDate  = $this->convertStringToDate($data->get('_achatdate'));
-        $achat->setCreatedAt($achatDate);
-        $achat->setPrixUnitaire($achatPrixUnitaire);
-        $achat->setPrixUnitaire($achatPrixUnitaire);
-        $achat->setQuantite($achatQuantite);
-        $achat->setArticle($article);
-        $achat->setModifyOn($date);
-        $em->persist($achat);
-        $em->flush();
+        try{
+            $date  = new \DateTime();
+            $achatQuantite = $data->get('_achatquantite');
+            $achatPrixUnitaire = $data->get('_achatprixunitaire');
+            $achatArticle = $data->get('_achatarticle');
+            $article = $em->getRepository('StockBundle:Article')->find($achatArticle);
+            $achatDate  = $this->convertStringToDate($data->get('_achatdate'));
+            $achat->setCreatedAt($achatDate);
+            $achat->setPrixUnitaire($achatPrixUnitaire);
+            $achat->setPrixUnitaire($achatPrixUnitaire);
+            $achat->setQuantite($achatQuantite);
+            $achat->setArticle($article);
+            $achat->setModifyOn($date);
+            $em->persist($achat);
+            $em->flush();
+            $flashAlert = 'success';
+            $flashMessage = 'Modifier avec succes';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        }catch (\Exception $e){
+            $flashAlert = 'error';
+            $flashMessage = 'Une erreur c\'est produite lors de la modification';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        }
+
+
 
     }
 
@@ -126,20 +143,37 @@ class AchatController extends Controller
         // save
         $em = $this->getDoctrine()->getManager();
 
-        $achat = new Achat();
-        $data = $request->request;
-        $articleId = $data->get('_achatarticle');
-        $article = $em->getRepository('StockBundle:Article')->find($articleId);
-        $achatDate = $this->convertStringToDate($data->get('_achatdate'));
-        //$achatDate  = new \DateTime();
-        $achatQuantite = $data->get('_achatquantite');
-        $achatPrixUnitaire = $data->get('_achatprixunitaire');
-        $achat->setArticle($article);
-        $achat->setQuantite($achatQuantite);
-        $achat->setPrixUnitaire($achatPrixUnitaire);
-        $achat->setCreatedAt($achatDate);
-        $em->persist($achat);
-        $em->flush();
+        try{
+
+            $achat = new Achat();
+            $data = $request->request;
+            $articleId = $data->get('_achatarticle');
+            $article = $em->getRepository('StockBundle:Article')->find($articleId);
+            $achatDate = $this->convertStringToDate($data->get('_achatdate'));
+            //$achatDate  = new \DateTime();
+            $achatQuantite = $data->get('_achatquantite');
+            $achatPrixUnitaire = $data->get('_achatprixunitaire');
+            $achat->setArticle($article);
+            $achat->setQuantite($achatQuantite);
+            $achat->setPrixUnitaire($achatPrixUnitaire);
+            $achat->setCreatedAt($achatDate);
+            $em->persist($achat);
+            $em->flush();
+            $flashAlert = 'success';
+            $flashMessage = 'Enregistrer avec succes';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        }catch (\Exception $e){
+            $flashAlert = 'error';
+            $flashMessage = 'Une erreur c\'est produite lors de l\'enregistrement';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        }
+
 
     }
     function convertStringToDate($str){
@@ -158,16 +192,34 @@ class AchatController extends Controller
     public function deleteAction(Request $request)
     {
 
-        $achatId = $request->get('id');
-        $em = $this->getDoctrine()->getManager();
-        $achat = $em->getRepository('StockBundle:Achat')->find($achatId);
-        if (!$achat) {
-            throw $this->createNotFoundException('No guest found');
+        try{
+            $achatId = $request->get('id');
+            $em = $this->getDoctrine()->getManager();
+            $achat = $em->getRepository('StockBundle:Achat')->find($achatId);
+            if (!$achat) {
+                throw $this->createNotFoundException('No guest found');
+            }
+
+
+            $em->remove($achat);
+            $em->flush();
+
+            $flashAlert = 'success';
+            $flashMessage = 'Suprimer avec succes';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+
+        }catch (\Exception $e){
+            $flashAlert = 'error';
+            $flashMessage = 'Une erreur c\'est produite lors de la suppression';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
         }
 
-
-        $em->remove($achat);
-        $em->flush();
 
         return $this->redirectToRoute('achat_index');
     }

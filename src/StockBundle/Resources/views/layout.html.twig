@@ -39,7 +39,7 @@
 
 </head>
     <body class="global">
-        {% if app.request.hasPreviousSession %}
+        {#{% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
                     <div class="flash-{{ type }}">
@@ -47,7 +47,7 @@
                     </div>
                 {% endfor %}
             {% endfor %}
-        {% endif %}
+        {% endif %}#}
         <div class="col-md-12 content-cyber">
             <div class="col-md-2 Menu">
                 <img class="logo-cyber-3e" src="{{ asset('img/logo.jpg')}}">
@@ -94,6 +94,7 @@
             </div>
 
             <div class="col-md-10 page-cyber">
+                {% include 'StockBundle:Shared:alert_flash.html.twig' %}
                 {% block article_content %}
                 {% endblock article_content %}
             </div>

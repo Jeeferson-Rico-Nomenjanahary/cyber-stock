@@ -1,0 +1,25 @@
+{#{% if app.request.hasPreviousSession %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}#}
+{% for flash_message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <div class="ico"></div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="icon-close"></span></button>
+            <strong>Succes: </strong>
+            {{ flash_message }}
+        </div>
+{% endfor %}
+{% for flash_message in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div class="ico"></div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="icon-close"></span></button>
+            <strong>Erreur: </strong>
+            {{ flash_message }}
+        </div>
+{% endfor %}

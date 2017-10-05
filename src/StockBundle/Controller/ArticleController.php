@@ -88,32 +88,65 @@ class ArticleController extends Controller
 
     public function saveArticle(Request $request){
         // save
-        $em = $this->getDoctrine()->getManager();
-        $article = new Article();
-        $data = $request->request;
-        $artcleName = trim($data->get('_artclename'));
-        $artcleDescription = trim($data->get('_articledescription'));
-        $date  = new \DateTime();
-        $article->setName($artcleName);
-        $article->setDescription($artcleDescription);
-        $article->setCreatedAt($date);
-        $em->persist($article);
-        $em->flush();
+        try{
+            $em = $this->getDoctrine()->getManager();
+            $article = new Article();
+            $data = $request->request;
+            $artcleName = trim($data->get('_artclename'));
+            $artcleDescription = trim($data->get('_articledescription'));
+            $date  = new \DateTime();
+            $article->setName($artcleName);
+            $article->setDescription($artcleDescription);
+            $article->setCreatedAt($date);
+            $em->persist($article);
+            $em->flush();
+            $flashAlert = 'success';
+            $flashMessage = 'Enregistrer avec succes';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        } catch (\Exception $e){
+            $flashAlert = 'error';
+            $flashMessage = 'Une erreur c\'est produite lors de l\'enregistrement';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        }
+
 
     }
 
     public function updateArticle($article,Request $request){
         // update
-        $em = $this->getDoctrine()->getManager();
-        $data = $request->request;
-        $artcleName = trim($data->get('_artclename'));
-        $artcleDescription = trim($data->get('_articledescription'));
-        $date  = new \DateTime();
-        $article->setName($artcleName);
-        $article->setDescription($artcleDescription);
-        $article->setModifyOn($date);
-        $em->persist($article);
-        $em->flush();
+        try {
+            $em = $this->getDoctrine()->getManager();
+            $data = $request->request;
+            $artcleName = trim($data->get('_artclename'));
+            $artcleDescription = trim($data->get('_articledescription'));
+            $date  = new \DateTime();
+            $article->setName($artcleName);
+            $article->setDescription($artcleDescription);
+            $article->setModifyOn($date);
+            $em->persist($article);
+            $em->flush();
+            $flashAlert = 'success';
+            $flashMessage = 'Modifier avec succes';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+
+        }catch (\Exception $e){
+            $flashAlert = 'error';
+            $flashMessage = 'Une erreur c\'est produite lors de la modification';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        }
+
 
     }
 
@@ -126,16 +159,32 @@ class ArticleController extends Controller
     public function deleteAction(Request $request)
     {
 
-        $articleId = $request->get('id');
-        $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository('StockBundle:Article')->find($articleId);
-        if (!$article) {
-            throw $this->createNotFoundException('No guest found');
+        try{
+            $articleId = $request->get('id');
+            $em = $this->getDoctrine()->getManager();
+            $article = $em->getRepository('StockBundle:Article')->find($articleId);
+            if (!$article) {
+                throw $this->createNotFoundException('No guest found');
+            }
+
+
+            $em->remove($article);
+            $em->flush();
+            $flashAlert = 'success';
+            $flashMessage = 'Suprimer avec succes';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        }catch (\Exception $e){
+            $flashAlert = 'error';
+            $flashMessage = 'Une erreur c\'est produite lors de la suppression';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
         }
 
-
-        $em->remove($article);
-        $em->flush();
 
         return $this->redirectToRoute('article_index');
     }

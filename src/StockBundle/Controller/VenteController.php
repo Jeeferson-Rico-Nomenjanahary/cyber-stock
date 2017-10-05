@@ -84,23 +84,40 @@ class VenteController extends Controller
     }
     public function updateAchat($vente,Request $request){
         // update
-        $em = $this->getDoctrine()->getManager();
-        $data = $request->request;
+        try {
+            $em = $this->getDoctrine()->getManager();
+            $data = $request->request;
 
-        $date  = new \DateTime();
-        $venteQuantite = $data->get('_ventequantite');
-        $ventePrixUnitaire = $data->get('_venteprixunitaire');
-        $venteArticle = $data->get('_ventearticle');
-        $article = $em->getRepository('StockBundle:Article')->find($venteArticle);
-        $venteDate  = $this->convertStringToDate($data->get('_ventedate'));
-        $vente->setCreatedAt($venteDate);
-        $vente->setPrixUnitaire($ventePrixUnitaire);
-        $vente->setPrixUnitaire($ventePrixUnitaire);
-        $vente->setQuantite($venteQuantite);
-        $vente->setArticle($article);
-        $vente->setModifyOn($date);
-        $em->persist($vente);
-        $em->flush();
+            $date  = new \DateTime();
+            $venteQuantite = $data->get('_ventequantite');
+            $ventePrixUnitaire = $data->get('_venteprixunitaire');
+            $venteArticle = $data->get('_ventearticle');
+            $article = $em->getRepository('StockBundle:Article')->find($venteArticle);
+            $venteDate  = $this->convertStringToDate($data->get('_ventedate'));
+            $vente->setCreatedAt($venteDate);
+            $vente->setPrixUnitaire($ventePrixUnitaire);
+            $vente->setPrixUnitaire($ventePrixUnitaire);
+            $vente->setQuantite($venteQuantite);
+            $vente->setArticle($article);
+            $vente->setModifyOn($date);
+            $em->persist($vente);
+            $em->flush();
+            $flashAlert = 'success';
+            $flashMessage = 'Modifier avec succes';
+
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        } catch (\Exception $e){
+            $flashAlert = 'error';
+            $flashMessage = 'Une erreur c\'est produite lors de la modification';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        }
+
 
     }
 
@@ -124,21 +141,39 @@ class VenteController extends Controller
 
     public function saveVente(Request $request){
         // save
-        $em = $this->getDoctrine()->getManager();
+        try {
+            $em = $this->getDoctrine()->getManager();
 
-        $vente = new Vente();
-        $data = $request->request;
-        $articleId = $data->get('_ventearticle');
-        $article = $em->getRepository('StockBundle:Article')->find($articleId);
-        $venteDate = $this->convertStringToDate($data->get('_ventedate'));
-        $venteQuantite = $data->get('_ventequantite');
-        $ventePrixUnitaire = $data->get('_venteprixunitaire');
-        $vente->setArticle($article);
-        $vente->setQuantite($venteQuantite);
-        $vente->setPrixUnitaire($ventePrixUnitaire);
-        $vente->setCreatedAt($venteDate);
-        $em->persist($vente);
-        $em->flush();
+            $vente = new Vente();
+            $data = $request->request;
+            $articleId = $data->get('_ventearticle');
+            $article = $em->getRepository('StockBundle:Article')->find($articleId);
+            $venteDate = $this->convertStringToDate($data->get('_ventedate'));
+            $venteQuantite = $data->get('_ventequantite');
+            $ventePrixUnitaire = $data->get('_venteprixunitaire');
+            $vente->setArticle($article);
+            $vente->setQuantite($venteQuantite);
+            $vente->setPrixUnitaire($ventePrixUnitaire);
+            $vente->setCreatedAt($venteDate);
+            $em->persist($vente);
+            $em->flush();
+
+            $flashAlert = 'success';
+            $flashMessage = 'Enregistrer avec succes';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+
+        }catch (\Exception $e){
+            $flashAlert = 'error';
+            $flashMessage = 'Une erreur c\'est produite lors de l\'enregistrement';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+        }
+
 
     }
     function convertStringToDate($str){
@@ -157,16 +192,33 @@ class VenteController extends Controller
     public function deleteAction(Request $request)
     {
 
-        $venteId = $request->get('id');
-        $em = $this->getDoctrine()->getManager();
-        $vente = $em->getRepository('StockBundle:Vente')->find($venteId);
-        if (!$vente) {
-            throw $this->createNotFoundException('No guest found');
+        try {
+            $venteId = $request->get('id');
+            $em = $this->getDoctrine()->getManager();
+            $vente = $em->getRepository('StockBundle:Vente')->find($venteId);
+            if (!$vente) {
+                throw $this->createNotFoundException('No guest found');
+            }
+
+
+            $em->remove($vente);
+            $em->flush();
+            $flashAlert = 'success';
+            $flashMessage = 'Suprimer avec succes';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
+
+        } catch (\Exception $e){
+            $flashAlert = 'error';
+            $flashMessage = 'Une erreur c\'est produite lors de la suppression';
+            $this->addFlash(
+                $flashAlert,
+                $flashMessage
+            );
         }
 
-
-        $em->remove($vente);
-        $em->flush();
 
         return $this->redirectToRoute('vente_index');
     }
