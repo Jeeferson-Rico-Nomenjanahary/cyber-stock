@@ -30,8 +30,8 @@
             <tbody>
             <tr class="utilisateur-tr">
 
-                <td class="table_title">{{ knp_pagination_sortable(users, 'Utilisateur', 'username') }}</td>
-                <td class="table_title">{{ knp_pagination_sortable(users, 'Email', 'email') }}</td>
+                <td class="table_title" id="filter">{{ knp_pagination_sortable(users, 'Utilisateur', 'username') }}</td>
+                <td class="table_title" id="filter">{{ knp_pagination_sortable(users, 'Email', 'email') }}</td>
                 <td class="table_title">Rôle</td>
                 <td class="table_title">Status</td>
                 {% if is_granted('ROLE_ADMIN') %}

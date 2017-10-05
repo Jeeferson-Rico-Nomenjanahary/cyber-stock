@@ -24,7 +24,7 @@
         <table>
             <tbody>
             <tr class="article-tr">
-                <td class="table_title">{{ knp_pagination_sortable(articles, 'Nom', 'name') }}</td>
+                <td class="table_title" id="filter">{{ knp_pagination_sortable(articles, 'Nom', 'name') }}</td>
                 <td class="table_title">Description</td>
                 {% if is_granted('ROLE_ADMIN') %}
                     <td class="table_title">Action</td>

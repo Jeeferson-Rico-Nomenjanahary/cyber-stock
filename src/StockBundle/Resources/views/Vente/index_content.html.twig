@@ -31,8 +31,8 @@
         <table>
             <tbody>
             <tr>
-                <td class="table_title">{{ knp_pagination_sortable(ventes, 'Date', 'ven.createdAt') }}</td>
-                <td class="table_title">{{ knp_pagination_sortable(ventes, 'Article', 'a.name') }}</td>
+                <td class="table_title" id="filter-date">{{ knp_pagination_sortable(ventes, 'Date', 'ven.createdAt') }}</td>
+                <td class="table_title" id="filter">{{ knp_pagination_sortable(ventes, 'Article', 'a.name') }}</td>
                 <td class="table_title">Description</td>
                 <td class="table_title">{{ knp_pagination_sortable(ventes, 'Quantite', 'ven.quantite') }}</td>
                 <td class="table_title">{{ knp_pagination_sortable(ventes, "Prix d'vente", 'ven.prixUnitaire') }}</td>
