@@ -52,6 +52,9 @@ class AchatRepository extends \Doctrine\ORM\EntityRepository
         if ($sort[0] != '' && $sort[1] !=''){
             //var_dump($sort);echo '<br>';
             //$dql .= ' ORDER BY ach.'.$sort[0].' '.$sort[1];
+            if ($sort[0]=='createdAt'){
+                $sort[0]='ach.createdAt';
+            }
             $dql .= ' ORDER BY '.$sort[0].' '.$sort[1];
 
         }

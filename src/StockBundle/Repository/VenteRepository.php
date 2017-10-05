@@ -38,15 +38,18 @@ class VenteRepository extends \Doctrine\ORM\EntityRepository
             if ($dates['from'] != '') {
                 $date = \DateTime::createFromFormat("d/m/Y", $dates['from']);
 
-                $dql .= $and." ach.createdAt >= '".$date->format('Y-m-d 00:00:00')."'";
+                $dql .= $and." ven.createdAt >= '".$date->format('Y-m-d 00:00:00')."'";
             }
             if ($dates['to'] != '') {
                 $date = \DateTime::createFromFormat("d/m/Y", $dates['to']);
-                $dql .= "AND ach.createdAt <= '".$date->format('Y-m-d 23:59:59')."'";
+                $dql .= "AND ven.createdAt <= '".$date->format('Y-m-d 23:59:59')."'";
             }
         }
 
         if ($sort[0] != '' && $sort[1] !=''){
+            if ($sort[0]=='createdAt'){
+                $sort[0]='ven.createdAt';
+            }
             $dql .= ' ORDER BY '.$sort[0].' '.$sort[1];
 
         }
