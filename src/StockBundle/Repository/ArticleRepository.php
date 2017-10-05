@@ -36,6 +36,8 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
 
         if ($sort[0] != '' && $sort[1] !=''){
             $dql .= ' ORDER BY art.'.$sort[0].' '.$sort[1];
+        } else {
+            $dql .= ' ORDER BY art.name ASC ';
         }
 
         $query = $this->getEntityManager()->createQuery($dql);
@@ -66,6 +68,8 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
         $dql = $dql . " " . $dqlWhere . " " . $dqlFilters;
         if ($sort[0] != '' && $sort[1] !=''){
             $dql .= ' ORDER BY art.'.$sort[0].' '.$sort[1];
+        }else{
+            $dql .= ' ORDER BY art.name ASC ';
         }
         $query = $this->getEntityManager()->createQuery($dql);
         return $query->getResult();
