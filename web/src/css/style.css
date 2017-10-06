@@ -191,6 +191,53 @@ fieldset {
 /*div#datepicker {
     width: 260px;
 }*/
+.alert-success {
+    background-color: rgba(255, 255, 255, 0.59) !important;
+    color: #f30d0d !important;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    border-color: rgba(255, 255, 255, 0.59) !important;
+    border-radius: 0 !important;
+
+}
+
+.alert-info {
+  color: #31708f;
+  background-color: rgba(255, 255, 255, 0.59) !important;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  border-color: rgba(255, 255, 255, 0.59) !important;
+  border-radius: 0 !important;
+}
+
+.alert-warning {
+  color: #8a6d3b;
+  background-color: rgba(255, 255, 255, 0.59) !important;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  border-color: rgba(255, 255, 255, 0.59) !important;
+  border-radius: 0 !important;
+}
+
+.alert-danger {
+  color: #a94442;
+  background-color: rgba(255, 255, 255, 0.59) !important;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  border-color: rgba(255, 255, 255, 0.59) !important;
+  border-radius: 0 !important;
+}
+
+
+a.btn-connex {
+    padding: 6px 16px !important;
+    font-family: serif;
+    text-decoration: none;
+}
 .contenu-recherche legend,.contenu-recherche label,.contenu-recherche span{
   color: #fff;
   font-weight: 100 !important;
