@@ -18,7 +18,7 @@
                     </label>
                 </div>
                 <button class="btn-connex" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
-
+                <a href="" class="btn-connex">Actualiser</a>
             </fieldset>
         </div>
     </form>
@@ -72,7 +72,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <td class="interval-user">
                             <a href="{{ path('user_delete', { 'id': user.id }) }}" onclick="return confirm('Voulez vous supprimer l\'utilisateur {{ user.username }} ?')" class="icon-uniE019" title="Suppression">SUPPR</a>
-                            <a href="" onclick="return confirm('Voulez vous modifier l\'utilisateur {{ user.username }} ?')" class="icon-uni6C" title="Modification">MODIF</a>
+
                             
                         </td>
                     {% endif %}
