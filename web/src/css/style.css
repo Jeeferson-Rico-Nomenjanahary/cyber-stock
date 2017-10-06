@@ -127,6 +127,11 @@ color: #fff;
     /*height: 945px;*/
   }
 }
+a.icon-uni6C.promouvoir {
+    float: right;
+    margin: 0;
+    color: green;
+}
 
 a.icon-uni6C,a.icon-uniE019 {
     color: #000000;
