@@ -52,7 +52,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <td class="interval-achat">
                                 <a href="{{ path('achat_edit', { 'id': achat.id }) }}" class="icon-uni6C" title="Modification">MODIF</a>
-                                <a href="{{ path('achat_delete', { 'id': achat.id }) }}"  class="icon-uniE019" onclick="return confirm('Voulez vous supprimer l\'achat de l\'article {{ vente.article.name }} ?')"title="Suppression">SUPPR</a>
+                                <a href="{{ path('achat_delete', { 'id': achat.id }) }}"  class="icon-uniE019" onclick="return confirm('Voulez vous supprimer l\'achat de l\'article {{ achat.article.name }} ?')"title="Suppression">SUPPR</a>
                         </td>
                     {% endif %}
                 </tr>
