@@ -20,7 +20,7 @@
                     <input   type="text"  id="Article" name="filters[name]" value="{% if currentFilters['name'] is defined %}{{ currentFilters['name'] }}{% endif %}">
                 </div>
                 <button class=" btn-connex" type="submit" value=""><span class="icon-recherche">Recherche</span></button>
-                <a href="" class="btn-connex">Actualiser</a>
+                <a href="{{ path('stock_inventaire_index') }}" class="btn-connex">Actualiser</a>
 
             </fieldset>
         </div>
