@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new UtilisateurBundle\UtilisateurBundle(),
             new StockBundle\StockBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Liuggio\ExcelBundle\LiuggioExcelBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

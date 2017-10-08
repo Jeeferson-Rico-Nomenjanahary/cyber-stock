@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 
 /**
@@ -24,7 +25,6 @@ class AchatController extends Controller
      * Lists all achat entities.
      *
      * @Route("/", name="achat_index")
-     * @Method("GET")
      */
     public function indexAction(Request $request)
     {
@@ -47,6 +47,105 @@ class AchatController extends Controller
         }
 
         $achats = $repository->findAchat($sort, $filters, $dates);
+
+        if(isset($_REQUEST['export']) && $_REQUEST['export']=="doExport"){
+            // ask the service for a Excel5
+            $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
+
+
+            $phpExcelObject->getProperties()->setCreator("Plateforme collaborative")
+                ->setLastModifiedBy("Plateforme collaborative")
+                ->setTitle("Office 2005 XLSX Test Document")
+                ->setSubject("Office 2005 XLSX Test Document")
+                ->setDescription("List of user selected.")
+                ->setKeywords("office 2005 openxml php")
+                ->setCategory("Test result file");
+            $phpExcelObject->setActiveSheetIndex(0)
+                ->setCellValue('A12', 'Date')
+                ->setCellValue('B12', 'Article')
+                ->setCellValue('C12', 'Description')
+                ->setCellValue('D12', 'Quantité')
+                ->setCellValue('E12', 'Prix d\'achat')
+                ->setCellValue('F12', 'Prix d\'achat total');
+            $excelSheet =$phpExcelObject->getActiveSheet();
+            $default_border = array(
+                'style' => \PHPExcel_Style_Border::BORDER_THIN,
+                'color' => array('rgb'=>'E7FEFF')
+            );
+            $style_header = array(
+                'borders' => array(
+                    'bottom' => $default_border,
+                    'left' => $default_border,
+                    'top' => $default_border,
+                    'right' => $default_border,
+                ),
+                'fill' => array(
+                    'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb'=>'545e7f'),
+                ),
+                'font' => array(
+                    'bold' => true,
+                    'color'=>array('rgb'=>'FFFFFF'),
+                    'alignment'=>array('horizontal'=>\PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                    'name'=>'Arial',
+                )
+            );
+
+            $excelSheet->getStyle('A12:F12')->applyFromArray( $style_header );
+
+            //$phpExcelObject->getActiveSheet()->getStyle('A12')->getFill()->getStartColor()->setRGB('2A52BE');
+
+            $drawingobject = $this->get('phpexcel')->createPHPExcelWorksheetDrawing();
+            $drawingobject->setName('Image name');
+            $drawingobject->setDescription('Image description');
+            $drawingobject->setPath('img/logo.jpg');
+            $drawingobject->setHeight(200);
+            $drawingobject->setOffsetY(245);
+            $drawingobject->setCoordinates('A1');
+            $drawingobject->setWorksheet($excelSheet);
+
+            $ligne = 12 ;
+
+            foreach ($achats as $achat) {
+                $ligne++;
+                $dateCell = strval('A'.$ligne);
+                $articleCell = strval('B'.$ligne);
+                $descriptionCell = strval('C'.$ligne);
+                $quantiteCell = strval('D'.$ligne);
+                $prixachatCell = strval('E'.$ligne);
+                $totalCell = strval('F'.$ligne);
+                //$article = $achats["article"];
+                $excelSheet
+                    ->setCellValue($dateCell, $achat->getcreatedAt()->format('d/m/Y'))
+                    ->setCellValue($articleCell, $achat->getArticle()->getName())
+                    ->setCellValue($descriptionCell, $achat->getArticle()->getDescription())
+                    ->setCellValue($quantiteCell, $achat->getQuantite())
+                    ->setCellValue($prixachatCell, $achat->getPrixUnitaire())
+                    ->setCellValue($totalCell, $achat->getQuantite() * $achat->getPrixUnitaire());
+
+            }
+
+
+            $phpExcelObject->getActiveSheet()->setTitle('Plateforme collaborative');
+            // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+            $phpExcelObject->setActiveSheetIndex(0);
+
+            // create the writer
+            $writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
+            // create the response
+            $response = $this->get('phpexcel')->createStreamedResponse($writer);
+            // adding headers
+            $dispositionHeader = $response->headers->makeDisposition(
+                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                'user-list.xls'
+            );
+            $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
+            $response->headers->set('Pragma', 'public');
+            $response->headers->set('Cache-Control', 'maxage=1');
+            $response->headers->set('Content-Disposition', $dispositionHeader);
+
+            return $response;
+        }
 
 
         $achats = $this->get('knp_paginator')->paginate(

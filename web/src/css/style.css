@@ -97,24 +97,24 @@ color: #fff;
 }
 
 .icone-uniF07D:before {
-  content: "\f07d";
-  float: right;
+  content: "\f07d" !important;
+  float: right !important;
 }
 .icone-uniF15D:before {
-  content: "\f15d";
-  float: right;
+  content: "\f15d" !important;
+  float: right !important;
 }
 .icone-uniF15E:before {
-  content: "\f15e";
-  float: right;
+  content: "\f15e" !important;
+  float: right !important;
 }
 .icone-uniF162:before {
-  content: "\f162";
-  float: right;
+  content: "\f162" !important;
+  float: right !important;
 }
 .icone-uniF163:before {
-  content: "\f163";
-  float: right;
+  content: "\f163" !important;
+  float: right !important;
 }
 
 
