@@ -57,7 +57,7 @@ class AchatController extends Controller
                 ->setLastModifiedBy("E3 Services Informatique")
                 ->setTitle("Office 2005 XLSX Test Document")
                 ->setSubject("Office 2005 XLSX Test Document")
-                ->setDescription("List of user selected.")
+                ->setDescription("Liste des Achats.")
                 ->setKeywords("office 2005 openxml php")
                 ->setCategory("Test result file");
             $phpExcelObject->setActiveSheetIndex(0)
@@ -137,7 +137,7 @@ class AchatController extends Controller
             // adding headers
             $dispositionHeader = $response->headers->makeDisposition(
                 ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-                'user-list.xls'
+                'achat-list.xls'
             );
             $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
             $response->headers->set('Pragma', 'public');
