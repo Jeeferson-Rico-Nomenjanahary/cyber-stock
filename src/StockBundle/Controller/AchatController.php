@@ -53,8 +53,8 @@ class AchatController extends Controller
             $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
 
 
-            $phpExcelObject->getProperties()->setCreator("Plateforme collaborative")
-                ->setLastModifiedBy("Plateforme collaborative")
+            $phpExcelObject->getProperties()->setCreator("E3 Services Informatique")
+                ->setLastModifiedBy("E3 Services Informatique")
                 ->setTitle("Office 2005 XLSX Test Document")
                 ->setSubject("Office 2005 XLSX Test Document")
                 ->setDescription("List of user selected.")
@@ -126,7 +126,7 @@ class AchatController extends Controller
             }
 
 
-            $phpExcelObject->getActiveSheet()->setTitle('Plateforme collaborative');
+            $phpExcelObject->getActiveSheet()->setTitle('E3 Services Informatique');
             // Set active sheet index to the first sheet, so Excel opens this as the first sheet
             $phpExcelObject->setActiveSheetIndex(0);
 
