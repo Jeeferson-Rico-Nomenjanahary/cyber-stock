@@ -232,11 +232,32 @@ fieldset {
   border-radius: 0 !important;
 }
 
-
+.export{
+    float: right;
+    background: rgba(255, 255, 255, 0.75);
+    position: absolute;
+    right: 14px;
+    top: 21%;
+    padding: 5px 15px;
+    color: green;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+}
+.export:hover{
+  background: #ffffff;
+  color: green;
+  text-decoration: none;
+}
 a.btn-connex {
     padding: 6px 16px !important;
     font-family: serif;
-    text-decoration: none;
+    text-decoration: none !important;
+}
+.contenu-recherche legend{
+  margin: 10px;
+    padding: 0 10px;
 }
 .contenu-recherche legend,.contenu-recherche label,.contenu-recherche span{
   color: #fff;
