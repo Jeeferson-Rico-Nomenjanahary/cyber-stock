@@ -55,21 +55,21 @@
                   <ul class="mainmenu">
                     <li><a href="">ARTICLE</a>
                     <ul class="submenu">
-                        <li><a href="{{ path('article_index') }}">Liste des Article</a></li>
+                        <li><a href="{{ path('article_index') }}">Liste des Articles</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <li><a href="{{ path('article_add') }}">Nouvel Article</a></li>
                         {% endif %}
                       </ul></li>
                     <li><a href="">ACHAT</a>
                     <ul class="submenu">
-                        <li><a href="{{ path('achat_index') }}">Liste des Achat</a></li>
+                        <li><a href="{{ path('achat_index') }}">Liste des Achats</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="{{ path('achat_add') }}">Nouvel Achat</a></li>
                         {% endif %}
                       </ul></li>
                     <li><a href="{{ path('vente_index') }}">VENTE</a>
                     <ul class="submenu">
-                        <li><a href="{{ path('vente_index') }}">Liste des Vente</a></li>
+                        <li><a href="{{ path('vente_index') }}">Liste des Ventes</a></li>
                         <li><a href="{{ path('vente_add') }}">Nouvel Vente</a></li>
                       </ul></li>
                     <li><a href="{{ path('stock_stock_index') }}">EN STOCK</a>
@@ -84,7 +84,7 @@
                       {% if is_granted('ROLE_ADMIN') %}
                           <li><a href="">UTILISATEUR</a>
                               <ul class="submenu">
-                                  <li><a href="{{ path('utilisateur_list') }}">Liste des utilisateur</a></li>
+                                  <li><a href="{{ path('utilisateur_list') }}">Liste des utilisateurs</a></li>
                                   <li><a href="{{ path('fos_user_registration_register') }}">Nouvel utilisateur</a></li>
                               </ul></li>
                       {% endif %}
