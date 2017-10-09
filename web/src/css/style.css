@@ -184,6 +184,7 @@ fieldset {
     border: 2px solid #fff!important;
     border-radius: 6px;
     width: max-content;
+    width: -moz-max-content;
     /*color: #fff;*/
     font-size: 18px;
 
@@ -237,13 +238,18 @@ fieldset {
     background: rgba(255, 255, 255, 0.75);
     position: absolute;
     right: 14px;
-    top: 21%;
+    top: 18%;
     padding: 5px 15px;
     color: green;
     font-weight: bold;
     border-radius: 5px;
     text-decoration: none;
     border: none;
+}
+@media (max-width: 1523px){
+  .export{
+    top: 11% !important;
+  }
 }
 .export:hover{
   background: #ffffff;
@@ -254,6 +260,11 @@ a.btn-connex {
     padding: 6px 16px !important;
     font-family: serif;
     text-decoration: none !important;
+}
+legend {
+    width: auto !important;
+    padding: 0 10px !important;
+    margin: 0 20px !important;
 }
 .contenu-recherche legend{
   margin: 10px;
