@@ -124,7 +124,7 @@ class InventaireController extends Controller
 
                 $excelSheet
                     ->setCellValue($actionCell, $inventaire['type'])
-                    ->setCellValue($dateCell, $inventaire['date'])
+                    ->setCellValue($dateCell, date('d/m/Y', strtotime($inventaire['date'])))
                     ->setCellValue($articleCell, $inventaire['article'])
                     ->setCellValue($descriptionCell, $inventaire['description'])
                     ->setCellValue($quantiteCell, $inventaire['quantite'])
