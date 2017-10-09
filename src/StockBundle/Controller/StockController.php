@@ -50,7 +50,7 @@ class StockController extends Controller
                 ->setLastModifiedBy("E3 Services Informatique")
                 ->setTitle("Office 2005 XLSX Test Document")
                 ->setSubject("Office 2005 XLSX Test Document")
-                ->setDescription("Liste des Ventes.")
+                ->setDescription("Liste des Stocks.")
                 ->setKeywords("office 2005 openxml php")
                 ->setCategory("Test result file");
             $phpExcelObject->setActiveSheetIndex(0)
