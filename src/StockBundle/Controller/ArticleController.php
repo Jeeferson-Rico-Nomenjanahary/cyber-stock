@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 
 /**
@@ -39,6 +40,91 @@ class ArticleController extends Controller
         }
 
         $articles = $repository->findArticle($sort, $filters);
+        if(isset($_REQUEST['export']) && $_REQUEST['export']=="doExport"){
+            // ask the service for a Excel5
+            $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
+
+
+            $phpExcelObject->getProperties()->setCreator("E3 Services Informatique")
+                ->setLastModifiedBy("E3 Services Informatique")
+                ->setTitle("Office 2005 XLSX Test Document")
+                ->setSubject("Office 2005 XLSX Test Document")
+                ->setDescription("Liste des Achats.")
+                ->setKeywords("office 2005 openxml php")
+                ->setCategory("Test result file");
+            $phpExcelObject->setActiveSheetIndex(0)
+                ->setCellValue('A12', 'Nom')
+                ->setCellValue('B12', 'Description');
+            $excelSheet =$phpExcelObject->getActiveSheet();
+            $default_border = array(
+                'style' => \PHPExcel_Style_Border::BORDER_THIN,
+                'color' => array('rgb'=>'E7FEFF')
+            );
+            $style_header = array(
+                'borders' => array(
+                    'bottom' => $default_border,
+                    'left' => $default_border,
+                    'top' => $default_border,
+                    'right' => $default_border,
+                ),
+                'fill' => array(
+                    'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb'=>'545e7f'),
+                ),
+                'font' => array(
+                    'bold' => true,
+                    'color'=>array('rgb'=>'FFFFFF'),
+                    'alignment'=>array('horizontal'=>\PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                    'name'=>'Arial',
+                )
+            );
+
+            $excelSheet->getStyle('A12:B12')->applyFromArray( $style_header );
+
+            //$phpExcelObject->getActiveSheet()->getStyle('A12')->getFill()->getStartColor()->setRGB('2A52BE');
+
+            $drawingobject = $this->get('phpexcel')->createPHPExcelWorksheetDrawing();
+            $drawingobject->setName('Image name');
+            $drawingobject->setDescription('Image description');
+            $drawingobject->setPath('img/logo.jpg');
+            $drawingobject->setHeight(200);
+            $drawingobject->setOffsetY(245);
+            $drawingobject->setCoordinates('A1');
+            $drawingobject->setWorksheet($excelSheet);
+
+            $ligne = 12 ;
+
+            foreach ($articles as $article) {
+                $ligne++;
+                $nomCell = strval('A'.$ligne);
+                $descriptionCell = strval('B'.$ligne);
+                $excelSheet
+                    ->setCellValue($nomCell, $article->getName())
+                    ->setCellValue($descriptionCell, $article->getDescription());
+
+            }
+
+
+            $phpExcelObject->getActiveSheet()->setTitle('E3 Services Informatique');
+            // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+            $phpExcelObject->setActiveSheetIndex(0);
+
+            // create the writer
+            $writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
+            // create the response
+            $response = $this->get('phpexcel')->createStreamedResponse($writer);
+            // adding headers
+            $dispositionHeader = $response->headers->makeDisposition(
+                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                'articles-list.xls'
+            );
+            $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
+            $response->headers->set('Pragma', 'public');
+            $response->headers->set('Cache-Control', 'maxage=1');
+            $response->headers->set('Content-Disposition', $dispositionHeader);
+
+            return $response;
+        }
 
         $articles = $this->get('knp_paginator')->paginate(
             $articles,
