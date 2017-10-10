@@ -49,7 +49,7 @@ class ArticleController extends Controller
                 ->setLastModifiedBy("E3 Services Informatique")
                 ->setTitle("Office 2005 XLSX Test Document")
                 ->setSubject("Office 2005 XLSX Test Document")
-                ->setDescription("Liste des Article.")
+                ->setDescription("Liste des Articles.")
                 ->setKeywords("office 2005 openxml php")
                 ->setCategory("Test result file");
             $phpExcelObject->setActiveSheetIndex(0)
